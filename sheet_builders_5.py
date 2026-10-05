@@ -300,7 +300,7 @@ def build_sheet_28_notes_2023(wb):
         ("Note 16", "Current Taxation", "Police Trust Fund (PTF) Levy Provision", 365.00, 0.00, "0.005% of PBT"),
         ("Note 16", "TOTAL CURRENT TAX LIABILITIES", "Statutory Current Tax Payable", "=SUM(D51:D53)", "=SUM(E51:E53)", "TIED TO SFP"),
         
-        ("Note 17", "Borrowings & Director's Loans", "Director Project Loan (Engr. Babatunde Goke)", 4500000.00, 0.00, "IAS 24 Related Party"),
+        ("Note 17", "Borrowings & Director's Loans", "Director Project Loan (Adegoke Segun Babatunde)", 4500000.00, 0.00, "IAS 24 Related Party"),
         ("Note 17", "TOTAL BORROWINGS", "Non-Current Project Funding", "=D55", "=E55", "TIED TO SFP"),
         
         ("Note 18", "Share Capital", "1,000,000 Ordinary Shares of ₦1.00 each", 1000000.00, 1000000.00, "Authorized & Issued"),
@@ -585,7 +585,7 @@ def build_sheet_30_notes_2024(wb):
         ("Note 16", "Current Taxation", "Police Trust Fund (PTF) Levy Provision", 625.00, 365.00, "0.005% of PBT"),
         ("Note 16", "TOTAL CURRENT TAX CHARGE", "Current Tax Provision for Year", "=SUM(D52:D54)", "=SUM(E52:E54)", "TIED TO SPLOCI"),
         
-        ("Note 17", "Borrowings & Director's Loans", "Director Project Loan (Engr. Babatunde Goke)", 5800000.00, 4500000.00, "IAS 24 Related Party"),
+        ("Note 17", "Borrowings & Director's Loans", "Director Project Loan (Adegoke Segun Babatunde)", 5800000.00, 4500000.00, "IAS 24 Related Party"),
         ("Note 17", "TOTAL BORROWINGS", "Non-Current Project Funding", "=D56", "=E56", "TIED TO SFP"),
         
         ("Note 18", "Share Capital", "1,000,000 Ordinary Shares of ₦1.00 each", 1000000.00, 1000000.00, "Authorized & Issued"),
@@ -871,7 +871,7 @@ def build_sheet_32_notes_2025(wb):
         ("Note 16", "Current Taxation", "NASENI Development Levy Provision", 56500.00, 0.00, "0.25% of PBT"),
         ("Note 16", "TOTAL CURRENT TAX CHARGE", "Current Tax Provision for Year", "=SUM(D53:D56)", "=SUM(E53:E56)", "TIED TO SPLOCI"),
         
-        ("Note 17", "Borrowings & Director's Loans", "Director Project Loan (Engr. Babatunde Goke)", 7500000.00, 5800000.00, "IAS 24 Related Party"),
+        ("Note 17", "Borrowings & Director's Loans", "Director Project Loan (Adegoke Segun Babatunde)", 7500000.00, 5800000.00, "IAS 24 Related Party"),
         ("Note 17", "TOTAL BORROWINGS", "Non-Current Project Funding", "=D58", "=E58", "TIED TO SFP"),
         
         ("Note 18", "Share Capital", "1,000,000 Ordinary Shares of ₦1.00 each", 1000000.00, 1000000.00, "Authorized & Issued"),

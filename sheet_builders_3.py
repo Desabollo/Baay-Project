@@ -360,10 +360,10 @@ def build_sheet_19_related_parties_equity(wb):
     style_header(ws, 4, headers)
     
     parties = [
-        ("Director Financing Loan (Opening)", "Engr. Babatunde Goke", "Managing Director / 70% Shareholder", 0.00, 0.00, 4500000.00, 5800000.00),
-        ("New Direct Advances Injected", "Engr. Babatunde Goke", "Project Liquidity Support", 0.00, 4500000.00, 1300000.00, 1700000.00),
-        ("Repayments to Director", "Engr. Babatunde Goke", "Cash Reimbursement", 0.00, 0.00, 0.00, 0.00),
-        ("Director Project Loan (Closing SFP)", "Engr. Babatunde Goke", "Unsecured, Interest-Free, Subordinated", 0.00, 4500000.00, 5800000.00, 7500000.00),
+        ("Director Financing Loan (Opening)", "Adegoke Segun Babatunde", "Director / 80% Shareholder per current CAC register", 0.00, 0.00, 4500000.00, 5800000.00),
+        ("New Direct Advances Injected", "Adegoke Segun Babatunde", "Project Liquidity Support", 0.00, 4500000.00, 1300000.00, 1700000.00),
+        ("Repayments to Director", "Adegoke Segun Babatunde", "Cash Reimbursement", 0.00, 0.00, 0.00, 0.00),
+        ("Director Project Loan (Closing SFP)", "Adegoke Segun Babatunde", "Unsecured, Interest-Free, Subordinated", 0.00, 4500000.00, 5800000.00, 7500000.00),
         ("Executive Directors' Remuneration", "Engr. & Mrs. Goke", "Key Management Personnel", 0.00, 1800000.00, 2400000.00, 3600000.00),
     ]
     

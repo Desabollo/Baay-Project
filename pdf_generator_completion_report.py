@@ -84,9 +84,11 @@ def create_completion_report_pdf(output_path):
     
     meta_box = [
         [Paragraph("<b>Target Entity:</b>", body_bold), Paragraph("BAAY PROJECTS LIMITED (RC 1526224)", body_style), Paragraph("<b>Engagement Date:</b>", body_bold), Paragraph("October 2026", body_style)],
-        [Paragraph("<b>Engagement Scope:</b>", body_bold), Paragraph("IFRS Reconstruction & Tax Audit Prep (2023-2025)", body_style), Paragraph("<b>Reporting Currency:</b>", body_bold), Paragraph("Nigerian Naira (NGN / ₦)", body_style)],
+        [Paragraph("<b>Engagement Scope:</b>", body_bold), Paragraph("IFRS Reconstruction & Tax Audit Prep (2023-2025)", body_style), Paragraph("<b>Reporting Currency:</b>", body_bold), Paragraph("Nigerian Naira (NGN / N)", body_style)],
+        [Paragraph("<b>Registered Office:</b>", body_bold), Paragraph("No. 7 Zika Usifo Street, Ikosi Ketu, Agege, Lagos State", body_style), Paragraph("<b>Company Secretary:</b>", body_bold), Paragraph("Adegoke Mary Ayoboade", body_style)],
+        [Paragraph("<b>Active Directors:</b>", body_bold), Paragraph("Adegoke Segun Babatunde; Adegoke Raheem Adebayo; Ajibola Oluwatobi Adedamola; Shuaib Suliat Aduke; Keshinro Phebe Oluwatunmise; Owolabi Charles Oluwatobi; Olayinka Oladotun Emmanuel; Noah Abdulazeez Afolabi", body_style), Paragraph("<b>External Auditors:</b>", body_bold), Paragraph("Sanni Waheed & Co. — FRC/2016/ICAN/2016/00000013886", body_style)],
         [Paragraph("<b>Governing Standards:</b>", body_bold), Paragraph("Full IFRS Standards, CAMA 2020, CITA, TETFA", body_style), Paragraph("<b>Tax Jurisdictions:</b>", body_bold), Paragraph("Federal Inland Revenue Service (FIRS) / LIRS", body_style)],
-        [Paragraph("<b>Primary Input Source:</b>", body_bold), Paragraph("BAAY_Sales_and_Customers_2022_2025_for_Audit.xlsx", body_style), Paragraph("<b>Master File Reference:</b>", body_bold), Paragraph("BAAY_PROJECTS_Master_Workbook_2023_2025.xlsx", body_style)],
+        [Paragraph("<b>Primary Input Source:</b>", body_bold), Paragraph("BAAY_Sales_and_Customers_2022_2025_for_Audit.xlsx", body_style), Paragraph("<b>Master File Reference:</b>", body_bold), Paragraph("BAAY_PROJECTS_LIMITED_Master_Workbook_2023_2025_updated.xlsx", body_style)],
     ]
     t_meta = Table(meta_box, colWidths=[115, 155, 110, 140])
     t_meta.setStyle(TableStyle([
@@ -105,12 +107,12 @@ def create_completion_report_pdf(output_path):
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=1, spaceAfter=4))
     story.append(Paragraph("This Information-Gap, Scope Limitation, and Completion Report accompanies the updated 3-year Master Financial Model (36 sheets), the three standalone Annual Statutory Draft Financial Statements (FY 2023, FY 2024, FY 2025 with prior year comparatives), and the comprehensive Landscape General Ledgers & Working Papers Pack for <b>BAAY PROJECTS LIMITED</b> (RC 1526224).", body_style))
     story.append(Spacer(1, 3))
-    story.append(Paragraph("Following receipt of the company accountant's comprehensive sales and customer analysis (<b>BAAY_Sales_and_Customers_2022_2025_for_Audit.xlsx</b>), the accounting model was updated to incorporate 859 customer sales receipts, 219 client subscriptions, 241 customer master profiles, and full project-by-project cash collection schedules across all active real estate schemes.", body_style))
+    story.append(Paragraph("Following receipt of the company accountant's comprehensive sales and customer analysis (<b>BAAY_Sales_and_Customers_2022_2025_for_Audit.xlsx</b>), the accounting model was updated to incorporate 859 customer sales-receipt lines, 214 client subscriptions, 236 distinct customer profiles, the complete exclusions and matching-exception populations, and project-by-project cash collection schedules. Cash receipts have been kept distinct from IFRS 15 revenue recognition.", body_style))
     story.append(Spacer(1, 4))
     
     story.append(Paragraph("<b>Table 1.1: Multi-Year Financial Performance & Position Summary (2022 - 2025)</b>", h3_style))
     exec_summary_data = [
-        [Paragraph("<b>Financial Indicator (₦)</b>", tbl_hdr), Paragraph("<b>2022 Audited</b>", tbl_hdr), Paragraph("<b>2023 Draft AFS</b>", tbl_hdr), Paragraph("<b>2024 Draft AFS</b>", tbl_hdr), Paragraph("<b>2025 Draft AFS</b>", tbl_hdr)],
+        [Paragraph("<b>Financial Indicator (N)</b>", tbl_hdr), Paragraph("<b>2022 Audited</b>", tbl_hdr), Paragraph("<b>2023 Draft AFS</b>", tbl_hdr), Paragraph("<b>2024 Draft AFS</b>", tbl_hdr), Paragraph("<b>2025 Draft AFS</b>", tbl_hdr)],
         [Paragraph("Revenue from Contracts (IFRS 15)", tbl_cell_l), Paragraph("18,250,000.00", tbl_cell_r), Paragraph("38,500,000.00", tbl_cell_r), Paragraph("64,200,000.00", tbl_cell_r), Paragraph("112,500,000.00", tbl_cell_r)],
         [Paragraph("Cost of Sales (Direct Project Expenses)", tbl_cell_l), Paragraph("-12,400,000.00", tbl_cell_r), Paragraph("-24,650,000.00", tbl_cell_r), Paragraph("-41,500,000.00", tbl_cell_r), Paragraph("-72,800,000.00", tbl_cell_r)],
         [Paragraph("<b>Gross Profit</b>", tbl_cell_bold_l), Paragraph("<b>5,850,000.00</b>", tbl_cell_bold_r), Paragraph("<b>13,850,000.00</b>", tbl_cell_bold_r), Paragraph("<b>22,700,000.00</b>", tbl_cell_bold_r), Paragraph("<b>39,700,000.00</b>", tbl_cell_bold_r)],
@@ -151,7 +153,7 @@ def create_completion_report_pdf(output_path):
     
     story.append(Paragraph("<b>Table 2.1: Customer Cash Receipts by Product Line & Estate (2022 - 2025)</b>", h3_style))
     sales_data = [
-        [Paragraph("<b>Estate / Product Line (₦)</b>", tbl_hdr), Paragraph("<b>2022 (₦)</b>", tbl_hdr), Paragraph("<b>2023 (₦)</b>", tbl_hdr), Paragraph("<b>2024 (₦)</b>", tbl_hdr), Paragraph("<b>2025 (₦)</b>", tbl_hdr), Paragraph("<b>Total Receipts (₦)</b>", tbl_hdr)],
+        [Paragraph("<b>Estate / Product Line (N)</b>", tbl_hdr), Paragraph("<b>2022 (N)</b>", tbl_hdr), Paragraph("<b>2023 (N)</b>", tbl_hdr), Paragraph("<b>2024 (N)</b>", tbl_hdr), Paragraph("<b>2025 (N)</b>", tbl_hdr), Paragraph("<b>Total Receipts (N)</b>", tbl_hdr)],
         [Paragraph("Green City Phase 1 (Lantaba, Ketu-Epe)", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph("23,666,000.00", tbl_cell_r), Paragraph("127,235,000.00", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("150,901,000.00", tbl_cell_r)],
         [Paragraph("Green City Phase 2 (Idobi, Ketu-Epe)", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph("2,740,000.00", tbl_cell_r), Paragraph("161,978,600.00", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("164,718,600.00", tbl_cell_r)],
         [Paragraph("Green City Phase 3 & Ext (Omu-Epe)", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("138,307,000.00", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("138,307,000.00", tbl_cell_r)],
@@ -179,22 +181,18 @@ def create_completion_report_pdf(output_path):
     # ------------------ SECTION 3: RECONCILIATION OF SALES TO BANK INFLOWS ------------------
     story.append(Paragraph("3. RECONCILIATION: SALES & CUSTOMER RECEIPTS TO BANK INFLOWS", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=1, spaceAfter=4))
-    story.append(Paragraph("The relationship between customer receipts recorded in sales registers, revenue recognized under IFRS 15, and total cash inflows across all commercial bank accounts (Providus, First Bank, Sterling, and GTBank) is reconciled below:", body_style))
+    story.append(Paragraph("The control bridge below compares the accountant's cash-receipt population with the bank-inflow control totals presently carried for Providus, First Bank, Sterling and GTBank. It identifies the amount awaiting transaction-level allocation without posting that control difference to revenue or using it as a balancing plug. The separate reconciliation workbook provides line-level drill-down and bank-coverage details.", body_style))
     story.append(Spacer(1, 3))
     
     recon_data = [
-        [Paragraph("<b>Reconciliation Component / Cash Flow Stream (₦)</b>", tbl_hdr), Paragraph("<b>FY 2023 (₦)</b>", tbl_hdr), Paragraph("<b>FY 2024 (₦)</b>", tbl_hdr), Paragraph("<b>FY 2025 (₦)</b>", tbl_hdr), Paragraph("<b>Total (2023-2025) (₦)</b>", tbl_hdr)],
+        [Paragraph("<b>Reconciliation Component / Cash Flow Stream (N)</b>", tbl_hdr), Paragraph("<b>FY 2023 (N)</b>", tbl_hdr), Paragraph("<b>FY 2024 (N)</b>", tbl_hdr), Paragraph("<b>FY 2025 (N)</b>", tbl_hdr), Paragraph("<b>Total (2023-2025) (N)</b>", tbl_hdr)],
         [Paragraph("<b>Customer Sales Receipts per Sales Ledger</b>", tbl_cell_bold_l), Paragraph("125,620,000.00", tbl_cell_r), Paragraph("594,080,600.00", tbl_cell_r), Paragraph("1,865,113,400.00", tbl_cell_r), Paragraph("2,584,814,000.00", tbl_cell_r)],
-        [Paragraph("Add: Excluded Inflows (Co-ownership Fixed Return)", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph("22,200,000.00", tbl_cell_r), Paragraph("212,250,500.00", tbl_cell_r), Paragraph("234,450,500.00", tbl_cell_r)],
-        [Paragraph("Add: Service Engagements & Ancillary Fees", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph("4,483,250.00", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("4,483,250.00", tbl_cell_r)],
-        [Paragraph("Add: Exceptions & Unmatched Receipts (Dec 23 - Dec 24)", tbl_cell_l), Paragraph("5,900,000.00", tbl_cell_r), Paragraph("132,464,537.00", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("138,364,537.00", tbl_cell_r)],
-        [Paragraph("<b>Total Customer & Commercial Collections Population</b>", tbl_cell_bold_l), Paragraph("<b>131,520,000.00</b>", tbl_cell_bold_r), Paragraph("<b>753,228,387.00</b>", tbl_cell_bold_r), Paragraph("<b>2,077,363,900.00</b>", tbl_cell_bold_r), Paragraph("<b>2,962,112,287.00</b>", tbl_cell_bold_r)],
-        [Paragraph("<i>Less: IFRS 15 Contract Liabilities (Unearned Advance Deposits)</i>", tbl_cell_l), Paragraph("-2,400,000.00", tbl_cell_r), Paragraph("-3,600,000.00", tbl_cell_r), Paragraph("-5,800,000.00", tbl_cell_r), Paragraph("-11,800,000.00", tbl_cell_r)],
-        [Paragraph("<i>Less: Collections allocated to Project Escrow & Off-Book Accounts</i>", tbl_cell_l), Paragraph("-90,620,000.00", tbl_cell_r), Paragraph("-685,428,387.00", tbl_cell_r), Paragraph("-1,959,063,900.00", tbl_cell_r), Paragraph("-2,735,112,287.00", tbl_cell_r)],
-        [Paragraph("<b>Operating Bank Account Inflows (Providus / FBN / Sterling)</b>", tbl_cell_bold_l), Paragraph("<b>38,500,000.00</b>", tbl_cell_bold_r), Paragraph("<b>64,200,000.00</b>", tbl_cell_bold_r), Paragraph("<b>112,500,000.00</b>", tbl_cell_bold_r), Paragraph("<b>215,200,000.00</b>", tbl_cell_bold_r)],
-        [Paragraph("Add: Director Project Financing Inflows (Engr. B. Goke)", tbl_cell_l), Paragraph("4,500,000.00", tbl_cell_r), Paragraph("1,300,000.00", tbl_cell_r), Paragraph("1,700,000.00", tbl_cell_r), Paragraph("7,500,000.00", tbl_cell_r)],
-        [Paragraph("Add: Interbank Liquidity Transfers between Accounts", tbl_cell_l), Paragraph("518,344.15", tbl_cell_r), Paragraph("9,250,000.00", tbl_cell_r), Paragraph("16,681,655.85", tbl_cell_r), Paragraph("26,450,000.00", tbl_cell_r)],
-        [Paragraph("<b>TOTAL RECONCILED BANK STATEMENT CASH INFLOWS</b>", tbl_cell_bold_l), Paragraph("<b>43,518,344.15</b>", tbl_cell_bold_r), Paragraph("<b>74,750,000.00</b>", tbl_cell_bold_r), Paragraph("<b>130,881,655.85</b>", tbl_cell_bold_r), Paragraph("<b>249,150,000.00</b>", tbl_cell_bold_r)],
+        [Paragraph("Add: Other Source Items Excluded from Sales", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph("26,683,250.00", tbl_cell_r), Paragraph("212,250,500.00", tbl_cell_r), Paragraph("238,933,750.00", tbl_cell_r)],
+        [Paragraph("<b>Gross Source Receipt Population</b>", tbl_cell_bold_l), Paragraph("<b>125,620,000.00</b>", tbl_cell_bold_r), Paragraph("<b>620,763,850.00</b>", tbl_cell_bold_r), Paragraph("<b>2,077,363,900.00</b>", tbl_cell_bold_r), Paragraph("<b>2,823,747,750.00</b>", tbl_cell_bold_r)],
+        [Paragraph("<b>Bank Inflows per Current Master Control</b>", tbl_cell_bold_l), Paragraph("<b>43,518,344.15</b>", tbl_cell_bold_r), Paragraph("<b>74,750,000.00</b>", tbl_cell_bold_r), Paragraph("<b>130,881,655.85</b>", tbl_cell_bold_r), Paragraph("<b>249,150,000.00</b>", tbl_cell_bold_r)],
+        [Paragraph("<b>Amount Awaiting Transaction-Level Bank Allocation</b>", tbl_cell_bold_l), Paragraph("<b>82,101,655.85</b>", tbl_cell_bold_r), Paragraph("<b>546,013,850.00</b>", tbl_cell_bold_r), Paragraph("<b>1,946,482,244.15</b>", tbl_cell_bold_r), Paragraph("<b>2,574,597,750.00</b>", tbl_cell_bold_r)],
+        [Paragraph("Secondary Records Held Outside Sales Ledger", tbl_cell_l), Paragraph("5,900,000.00", tbl_cell_r), Paragraph("132,464,537.00", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("138,364,537.00", tbl_cell_r)],
+        [Paragraph("Control Treatment", tbl_cell_l), Paragraph("No automatic revenue posting", tbl_cell_c), Paragraph("No automatic revenue posting", tbl_cell_c), Paragraph("No automatic revenue posting", tbl_cell_c), Paragraph("IFRS 15 filter retained", tbl_cell_c)],
     ]
     t_recon = Table(recon_data, colWidths=[205, 75, 75, 80, 85])
     t_recon.setStyle(TableStyle([
@@ -213,11 +211,11 @@ def create_completion_report_pdf(output_path):
     # ------------------ SECTION 4: STATUTORY TAX LIABILITIES ------------------
     story.append(Paragraph("4. STATUTORY TAX STATUS & OUTSTANDING LIABILITIES (2023 - 2025)", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=1, spaceAfter=4))
-    story.append(Paragraph("A rigorous statutory tax review was executed under CITA, TETFA, and the Finance Acts. The cumulative statutory liabilities as of 31 December 2025 stand at <b>₦6,898,590.00</b> (excluding available WHT credits). The table below reflects the multi-year tax liability roll-forward:", body_style))
+    story.append(Paragraph("A rigorous statutory tax review was executed under CITA, TETFA, and the Finance Acts. The cumulative statutory liabilities as of 31 December 2025 stand at <b>N6,898,590.00</b> (excluding available WHT credits). The table below reflects the multi-year tax liability roll-forward:", body_style))
     story.append(Spacer(1, 3))
     
     tax_roll_data = [
-        [Paragraph("<b>Tax Obligation Head</b>", tbl_hdr), Paragraph("<b>2022 O/B (₦)</b>", tbl_hdr), Paragraph("<b>2023 Charge (₦)</b>", tbl_hdr), Paragraph("<b>2024 Charge (₦)</b>", tbl_hdr), Paragraph("<b>2025 Charge (₦)</b>", tbl_hdr), Paragraph("<b>Remittances (₦)</b>", tbl_hdr), Paragraph("<b>31 Dec 2025 Due (₦)</b>", tbl_hdr)],
+        [Paragraph("<b>Tax Obligation Head</b>", tbl_hdr), Paragraph("<b>2022 O/B (N)</b>", tbl_hdr), Paragraph("<b>2023 Charge (N)</b>", tbl_hdr), Paragraph("<b>2024 Charge (N)</b>", tbl_hdr), Paragraph("<b>2025 Charge (N)</b>", tbl_hdr), Paragraph("<b>Remittances (N)</b>", tbl_hdr), Paragraph("<b>31 Dec 2025 Due (N)</b>", tbl_hdr)],
         [Paragraph("Companies Income Tax (CIT)", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph("1,492,000.00", tbl_cell_r), Paragraph("2,528,000.00", tbl_cell_r), Paragraph("6,825,000.00", tbl_cell_r), Paragraph("-6,020,000.00", tbl_cell_r), Paragraph("4,825,000.00", tbl_cell_r)],
         [Paragraph("Tertiary Education Tax (TET)", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph("239,400.00", tbl_cell_r), Paragraph("408,600.00", tbl_cell_r), Paragraph("735,000.00", tbl_cell_r), Paragraph("-648,000.00", tbl_cell_r), Paragraph("735,000.00", tbl_cell_r)],
         [Paragraph("Police Trust Fund (PTF)", tbl_cell_l), Paragraph("90.00", tbl_cell_r), Paragraph("365.00", tbl_cell_r), Paragraph("625.00", tbl_cell_r), Paragraph("1,130.00", tbl_cell_r), Paragraph("-1,080.00", tbl_cell_r), Paragraph("1,130.00", tbl_cell_r)],
@@ -242,15 +240,15 @@ def create_completion_report_pdf(output_path):
     # ------------------ SECTION 5: ROADMAP TO FINAL SIGN-OFF ------------------
     story.append(Paragraph("5. ROADMAP TO FINAL AUDIT SIGN-OFF & SPECIFIC RECOMMENDATIONS", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=1, spaceAfter=4))
-    story.append(Paragraph("To enable the external auditors (PKF & Co. / Baker & Associates) to issue an <b>unqualified (clean) audit opinion</b> on the 2023, 2024, and 2025 financial statements, management should execute the following 5-point action plan:", body_style))
+    story.append(Paragraph("To enable the external auditors (Sanni Waheed & Co.) to issue an <b>unqualified (clean) audit opinion</b> on the 2023, 2024, and 2025 financial statements, management should execute the following 5-point action plan:", body_style))
     story.append(Spacer(1, 3))
     
     action_plan_data = [
         [Paragraph("<b>Step</b>", tbl_hdr), Paragraph("<b>Key Action Item & Specific Deliverable</b>", tbl_hdr), Paragraph("<b>Target Date</b>", tbl_hdr), Paragraph("<b>Responsible Party</b>", tbl_hdr)],
         [Paragraph("1", tbl_cell_c), Paragraph("<b>Direct Bank Confirmation Letters:</b> Formal circularization of Providus, Sterling, First Bank, and GTBank to verify year-end balances, loan facilities, and lien status.", tbl_cell_l), Paragraph("Within 14 Days", tbl_cell_c), Paragraph("External Auditors / MD", tbl_cell_c)],
         [Paragraph("2", tbl_cell_c), Paragraph("<b>Project Milestone Formalization:</b> Obtain signed engineer interim evaluation certificates for Pacific Court, Pacific Apartment, and Baay Foreshore to corroborate IFRS 15 stage of completion.", tbl_cell_l), Paragraph("Within 21 Days", tbl_cell_c), Paragraph("Lead Project Engineer", tbl_cell_c)],
-        [Paragraph("3", tbl_cell_c), Paragraph("<b>Director's Loan Subordination Agreement:</b> Formalize Board Resolution and execute subordinated loan agreement confirming zero interest and repayment terms for the ₦7.5m loan.", tbl_cell_l), Paragraph("Within 7 Days", tbl_cell_c), Paragraph("Legal Counsel / MD", tbl_cell_c)],
-        [Paragraph("4", tbl_cell_c), Paragraph("<b>FIRS Tax Credit Portal Reconciliation:</b> Download and validate official FIRS Withholding Tax Credit Notes (₦4.85m) to offset against outstanding CIT liabilities.", tbl_cell_l), Paragraph("Within 30 Days", tbl_cell_c), Paragraph("Tax Consultant", tbl_cell_c)],
+        [Paragraph("3", tbl_cell_c), Paragraph("<b>Director's Loan Subordination Agreement:</b> Formalize Board Resolution and execute subordinated loan agreement confirming zero interest and repayment terms for the N7.5m loan.", tbl_cell_l), Paragraph("Within 7 Days", tbl_cell_c), Paragraph("Legal Counsel / MD", tbl_cell_c)],
+        [Paragraph("4", tbl_cell_c), Paragraph("<b>FIRS Tax Credit Portal Reconciliation:</b> Download and validate official FIRS Withholding Tax Credit Notes (N4.85m) to offset against outstanding CIT liabilities.", tbl_cell_l), Paragraph("Within 30 Days", tbl_cell_c), Paragraph("Tax Consultant", tbl_cell_c)],
         [Paragraph("5", tbl_cell_c), Paragraph("<b>Board Approval & Signature:</b> Board of Directors meeting to review, approve, and execute the Draft Financial Statements, Statement of Directors' Responsibilities, and Notes.", tbl_cell_l), Paragraph("Upon Audit Clearance", tbl_cell_c), Paragraph("Board of Directors", tbl_cell_c)],
     ]
     t_action = Table(action_plan_data, colWidths=[25, 290, 85, 120])
@@ -271,7 +269,7 @@ def create_completion_report_pdf(output_path):
         [Paragraph("<b>Prepared By:</b>", body_bold), Paragraph("<b>Reviewed & Approved By:</b>", body_bold)],
         [Spacer(1, 12), Spacer(1, 12)],
         [Paragraph("_____________________________<br/><b>Financial Reconstruction Lead</b><br/>Audit & Advisory Services", body_style),
-         Paragraph("_____________________________<br/><b>Engr. Babatunde Goke</b><br/>Managing Director / CEO, BAAY PROJECTS LIMITED", body_style)]
+         Paragraph("_____________________________<br/><b>Adegoke Segun Babatunde</b><br/>Director, BAAY PROJECTS LIMITED", body_style)]
     ]
     t_sig = Table(sig_block, colWidths=[260, 260])
     t_sig.setStyle(TableStyle([
@@ -284,4 +282,4 @@ def create_completion_report_pdf(output_path):
     print(f"Successfully generated Completion Report '{output_path}'!")
 
 if __name__ == '__main__':
-    create_completion_report_pdf("BAAY_PROJECTS_LIMITED_Information_Gap_and_Completion_Report.pdf")
+    create_completion_report_pdf("BAAY_PROJECTS_LIMITED_Information_Gap_and_Completion_Report_updated.pdf")

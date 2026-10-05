@@ -31,7 +31,7 @@ class NumberedCanvas(canvas.Canvas):
             
             self.setFont("Helvetica-Oblique", 7.5)
             self.setFillColor(colors.HexColor("#595959"))
-            sub_text = getattr(self, 'doc_header_sub', 'Audited Financial Statements & Statutory Working Papers')
+            sub_text = getattr(self, 'doc_header_sub', 'Audited Financial Statements')
             self.drawRightString(self._pagesize[0] - 36, self._pagesize[1] - 25, sub_text)
             
             self.setStrokeColor(colors.HexColor("#1F4E79"))
@@ -45,7 +45,7 @@ class NumberedCanvas(canvas.Canvas):
             
             self.setFont("Helvetica", 7.5)
             self.setFillColor(colors.HexColor("#595959"))
-            footer_left = getattr(self, 'doc_footer_left', 'BAAY PROJECTS LIMITED — IFRS REPORTING PACK')
+            footer_left = getattr(self, 'doc_footer_left', 'BAAY PROJECTS LIMITED — ANNUAL REPORT AND FINANCIAL STATEMENTS')
             self.drawString(36, 22, footer_left)
             
             page_str = f"Page {self._pageNumber} of {page_count}"

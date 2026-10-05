@@ -8,8 +8,9 @@ import sheet_builders_3
 import sheet_builders_4
 import sheet_builders_5
 import sheet_builders_6
+from integrate_sales_customer_data import integrate
 
-print("Assembling BAAY_PROJECTS_LIMITED_Master_Workbook_2023_2025.xlsx...")
+print("Assembling BAAY_PROJECTS_LIMITED_Master_Workbook_2023_2025_updated.xlsx...")
 
 wb = openpyxl.Workbook()
 wb.remove(wb.active) # Remove default sheet
@@ -68,6 +69,9 @@ sheet_builders_6.build_sheet_34_cash_flow_workings(wb)
 sheet_builders_6.build_sheet_35_assumptions_estimates(wb)
 sheet_builders_6.build_sheet_36_exception_dashboard_checks(wb)
 
-output_filename = "BAAY_PROJECTS_LIMITED_Master_Workbook_2023_2025.xlsx"
+output_filename = "BAAY_PROJECTS_LIMITED_Master_Workbook_2023_2025_updated.xlsx"
 wb.save(output_filename)
 print(f"Master Workbook saved successfully as '{output_filename}'! Total sheets: {len(wb.sheetnames)}")
+print("Integrating accountant sales/customer schedules and creating reconciliation report...")
+integrate()
+print("Sales/customer integration completed; 36-sheet structure preserved.")
