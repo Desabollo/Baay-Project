@@ -80,7 +80,7 @@ def build_sheet_9_journal_entries(wb):
         ("JRN-2023-002", "2023-01-28", "INV-GEO-01", "Baay Projects Limited", "PROJ-GEN", "1510", "PPE - Office & Site Equipment", 1800000.00, 0.00, "Purchase of site surveying and engineering equipment (IAS 16)", "Finance Team", "POSTED", "Approved"),
         ("JRN-2023-002", "2023-01-28", "INV-GEO-01", "Baay Projects Limited", "PROJ-GEN", "1010", "Providus Bank - A/C 5400281942", 0.00, 1800000.00, "Bank payment for PPE acquisition", "Finance Team", "POSTED", "Approved"),
         
-        ("JRN-2023-003", "2023-02-15", "DIR-LOAN-01", "Baay Projects Limited", "PROJ-GEN", "1010", "Providus Bank - A/C 5400281942", 4500000.00, 0.00, "Director long-term project loan injection (Engr. B. Goke)", "Finance Team", "POSTED", "Approved"),
+        ("JRN-2023-003", "2023-02-15", "DIR-LOAN-01", "Baay Projects Limited", "PROJ-GEN", "1010", "Providus Bank - A/C 5400281942", 4500000.00, 0.00, "Director long-term project loan injection (Adegoke Segun Babatunde)", "Finance Team", "POSTED", "Approved"),
         ("JRN-2023-003", "2023-02-15", "DIR-LOAN-01", "Baay Projects Limited", "PROJ-GEN", "2510", "Director's Loan & Long-Term Project Funding", 0.00, 4500000.00, "Long-term related party project funding (IAS 24)", "Finance Team", "POSTED", "Approved"),
         
         ("JRN-2023-004", "2023-12-31", "CNT-LEK-01", "Baay Projects Limited", "PROJ-101", "1110", "Trade Receivables - Construction", 15500000.00, 0.00, "Billed progress billings on Lekki Phase 1 construction", "Finance Team", "POSTED", "Approved"),
@@ -188,7 +188,7 @@ def build_sheet_10_gl_ledgers(wb):
         # 1010 Providus Bank
         ("1010", "Providus Bank - A/C 5400281942", "2023-01-01", "JRN-2023-001", "OPEN-001", "Opening Balance B/F per 2022 Audited Balance Sheet", "PROJ-GEN", 52500.00, 0.00, 52500.00, 52500.00, "VERIFIED"),
         ("1010", "Providus Bank - A/C 5400281942", "2023-01-28", "JRN-2023-002", "INV-GEO-01", "Purchase of Site Survey Equipment (Geotech Instruments)", "PROJ-GEN", 0.00, 1800000.00, -1800000.00, -1747500.00, "VERIFIED"),
-        ("1010", "Providus Bank - A/C 5400281942", "2023-02-15", "JRN-2023-003", "DIR-LOAN-01", "Director Long-Term Project Funding (Engr. B. Goke)", "PROJ-GEN", 4500000.00, 0.00, 4500000.00, 2752500.00, "VERIFIED"),
+        ("1010", "Providus Bank - A/C 5400281942", "2023-02-15", "JRN-2023-003", "DIR-LOAN-01", "Director Long-Term Project Funding (Adegoke Segun Babatunde)", "PROJ-GEN", 4500000.00, 0.00, 4500000.00, 2752500.00, "VERIFIED"),
         ("1010", "Providus Bank - A/C 5400281942", "2023-12-31", "JRN-2023-005", "LND-IBJ-01", "Proceeds from 4 Serviced Plots Sale (Ibeju Scheme 1)", "PROJ-102", 12500000.00, 0.00, 12500000.00, 15252500.00, "VERIFIED"),
         ("1010", "Providus Bank - A/C 5400281942", "2023-12-31", "JRN-2023-006", "CON-IKJ-01", "Consultancy Fees Received (Horizon Holdings Ltd)", "PROJ-103", 4000000.00, 0.00, 4000000.00, 19252500.00, "VERIFIED"),
         ("1010", "Providus Bank - A/C 5400281942", "2023-12-31", "JRN-2023-007", "COS-ALL-01", "Direct Payments for Materials & Subcontracts", "PROJ-GEN", 0.00, 22525000.00, -22525000.00, -3272500.00, "VERIFIED"),
@@ -266,7 +266,7 @@ def build_sheet_10_gl_ledgers(wb):
         ("2130", "Current Tax Liabilities - PTF Payable", "2023-12-31", "JRN-2023-010", "TAX-PTF-23", "Police Trust Fund Levy Provision for FY 2023 (0.005%)", "PROJ-GEN", 0.00, 365.00, -365.00, -455.00, "VERIFIED"),
         
         # 2510 Director's Loan & Long-Term Project Funding
-        ("2510", "Director's Loan & Long-Term Project Funding", "2023-02-15", "JRN-2023-003", "DIR-LOAN-01", "Director Long-Term Loan Injection (Engr. B. Goke)", "PROJ-GEN", 0.00, 4500000.00, -4500000.00, -4500000.00, "VERIFIED"),
+        ("2510", "Director's Loan & Long-Term Project Funding", "2023-02-15", "JRN-2023-003", "DIR-LOAN-01", "Director Long-Term Loan Injection (Adegoke Segun Babatunde)", "PROJ-GEN", 0.00, 4500000.00, -4500000.00, -4500000.00, "VERIFIED"),
         
         # 3010 Ordinary Share Capital
         ("3010", "Ordinary Share Capital (₦1.00 par)", "2023-01-01", "JRN-2023-001", "OPEN-010", "1,000,000 Ordinary Shares of ₦1.00 Each Fully Paid", "PROJ-GEN", 0.00, 1000000.00, -1000000.00, -1000000.00, "VERIFIED"),
@@ -458,9 +458,9 @@ def build_sheet_12_tb_adjusted_preclosing(wb):
         ("2020", "Contract Liabilities - Customer Deposits", "Current Liabilities", 0.00, 2400000.00, 0.00, 3600000.00, 0.00, 5800000.00),
         ("2030", "Accrued Audit & Professional Fees", "Current Liabilities", 0.00, 375000.00, 0.00, 550000.00, 0.00, 850000.00),
         ("2040", "Other Accrued Expenses & Sundry Creditors", "Current Liabilities", 0.00, 245235.00, 0.00, 425500.00, 0.00, 683500.00),
-        ("2110", "Current Tax Liabilities - CIT Payable", "Current Liabilities", 0.00, 1492000.00, 0.00, 2128000.00, 0.00, 4825000.00),
+        ("2110", "Current Tax Liabilities - CIT Payable (Net of Remittances/Offsets)", "Current Liabilities", 0.00, 1492000.00, 0.00, 2059775.00, 0.00, 4607370.00),
         ("2120", "Current Tax Liabilities - TET Payable", "Current Liabilities", 0.00, 239400.00, 0.00, 408600.00, 0.00, 735000.00),
-        ("2130", "Current Tax Liabilities - PTF Payable", "Current Liabilities", 0.00, 455.00, 0.00, 625.00, 0.00, 1130.00),
+        ("2130", "Current Tax Liabilities - PTF Payable", "Current Liabilities", 0.00, 365.00, 0.00, 625.00, 0.00, 1130.00),
         ("2140", "Current Tax Liabilities - NASENI Levy", "Current Liabilities", 0.00, 0.00, 0.00, 0.00, 0.00, 56500.00),
         ("2510", "Director's Loan & Long-Term Funding", "Non-Current Liabilities", 0.00, 4500000.00, 0.00, 5800000.00, 0.00, 7500000.00),
         ("2610", "Deferred Tax Liability (IAS 12)", "Non-Current Liabilities", 0.00, 0.00, 0.00, 16000.00, 0.00, 98500.00),
@@ -543,9 +543,9 @@ def build_sheet_13_tb_postclosing(wb):
         ("2020", "Contract Liabilities - Customer Deposits", "Current Liabilities", 0.00, 2400000.00, 0.00, 3600000.00, 0.00, 5800000.00),
         ("2030", "Accrued Audit & Professional Fees", "Current Liabilities", 0.00, 375000.00, 0.00, 550000.00, 0.00, 850000.00),
         ("2040", "Other Accrued Expenses & Sundry Creditors", "Current Liabilities", 0.00, 245235.00, 0.00, 425500.00, 0.00, 683500.00),
-        ("2110", "Current Tax Liabilities - CIT Payable", "Current Liabilities", 0.00, 1492000.00, 0.00, 2128000.00, 0.00, 4825000.00),
+        ("2110", "Current Tax Liabilities - CIT Payable (Net of Remittances/Offsets)", "Current Liabilities", 0.00, 1492000.00, 0.00, 2059775.00, 0.00, 4607370.00),
         ("2120", "Current Tax Liabilities - TET Payable", "Current Liabilities", 0.00, 239400.00, 0.00, 408600.00, 0.00, 735000.00),
-        ("2130", "Current Tax Liabilities - PTF Payable", "Current Liabilities", 0.00, 455.00, 0.00, 625.00, 0.00, 1130.00),
+        ("2130", "Current Tax Liabilities - PTF Payable", "Current Liabilities", 0.00, 365.00, 0.00, 625.00, 0.00, 1130.00),
         ("2140", "Current Tax Liabilities - NASENI Levy", "Current Liabilities", 0.00, 0.00, 0.00, 0.00, 0.00, 56500.00),
         ("2510", "Director's Loan & Long-Term Funding", "Non-Current Liabilities", 0.00, 4500000.00, 0.00, 5800000.00, 0.00, 7500000.00),
         ("2610", "Deferred Tax Liability (IAS 12)", "Non-Current Liabilities", 0.00, 0.00, 0.00, 16000.00, 0.00, 98500.00),
