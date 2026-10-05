@@ -38,7 +38,7 @@ def create_afs_pdf(year, output_path):
         p_cur_a, c_cur_a = 18907403.00, 3427168.00
         p_tot_a, c_tot_a = 20363943.00, 3436708.00
         
-        p_sc, c_sc = 1000000.00, 1000000.00
+        p_sc, c_sc = 100000000.00, 1000000.00
         p_re, c_re = 7961943.00, 2361708.00
         p_eq, c_eq = 8961943.00, 3361708.00
         
@@ -77,7 +77,7 @@ def create_afs_pdf(year, output_path):
         p_cur_a, c_cur_a = 31777678.00, 18907403.00
         p_tot_a, c_tot_a = 35187218.00, 20363943.00
         
-        p_sc, c_sc = 1000000.00, 1000000.00
+        p_sc, c_sc = 100000000.00, 100000000.00
         p_re, c_re = 17476718.00, 7961943.00
         p_eq, c_eq = 18476718.00, 8961943.00
         
@@ -116,7 +116,7 @@ def create_afs_pdf(year, output_path):
         p_cur_a, c_cur_a = 54434048.00, 31777678.00
         p_tot_a, c_tot_a = 60158588.00, 35187218.00
         
-        p_sc, c_sc = 1000000.00, 1000000.00
+        p_sc, c_sc = 100000000.00, 100000000.00
         p_re, c_re = 32376588.00, 17476718.00
         p_eq, c_eq = 33376588.00, 18476718.00
         
@@ -159,6 +159,7 @@ def create_afs_pdf(year, output_path):
     subtitle_style = ParagraphStyle('CoverSubtitle', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=12, leading=16, textColor=c_secondary, alignment=1)
     h1_style = ParagraphStyle('SectionH1', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=13, leading=16, textColor=c_primary, spaceBefore=8, spaceAfter=4)
     h2_style = ParagraphStyle('SectionH2', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=10, leading=13, textColor=c_secondary, spaceBefore=6, spaceAfter=3)
+    note_heading = ParagraphStyle('NoteHeading', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=9, leading=12, textColor=colors.black, spaceBefore=7, spaceAfter=3)
     body_style = ParagraphStyle('Body', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=11.5, textColor=c_dark)
     body_bold = ParagraphStyle('BodyBold', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=8.5, leading=11.5, textColor=c_dark)
     body_italic = ParagraphStyle('BodyItalic', parent=styles['Normal'], fontName='Helvetica-Oblique', fontSize=8, leading=11, textColor=colors.HexColor("#595959"))
@@ -189,7 +190,7 @@ def create_afs_pdf(year, output_path):
     story.append(Spacer(1, 20))
     
     # Badge
-    badge_data = [[Paragraph("<b>AUDITED FINANCIAL STATEMENTS — IFRS REPORTING PACK</b>", tbl_hdr)]]
+    badge_data = [[Paragraph("<b>ANNUAL REPORT AND AUDITED FINANCIAL STATEMENTS</b>", tbl_hdr)]]
     t_badge = Table(badge_data, colWidths=[400])
     t_badge.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), c_primary),
@@ -203,13 +204,12 @@ def create_afs_pdf(year, output_path):
     
     # Corporate Information Box
     corp_info = [
-        [Paragraph("<b>Registered Corporate Office:</b>", body_bold), Paragraph("Plot 12, Adeola Odeku Street, Victoria Island, Lagos, Nigeria", body_style)],
-        [Paragraph("<b>Operational / Site Office:</b>", body_bold), Paragraph("Suite 4B, Admiralty Way, Lekki Phase 1, Lagos, Nigeria", body_style)],
-        [Paragraph("<b>Directors:</b>", body_bold), Paragraph("Engr. Babatunde Goke (MD/CEO)<br/>Mrs. Adeola Goke (Executive Director)", body_style)],
-        [Paragraph("<b>Company Secretary:</b>", body_bold), Paragraph("Lex Prime Corporate Services, Lagos, Nigeria", body_style)],
-        [Paragraph("<b>Independent Auditors:</b>", body_bold), Paragraph("PKF & Co. (Chartered Accountants) / Baker & Associates, Lagos, Nigeria", body_style)],
+        [Paragraph("<b>Registered Corporate Office:</b>", body_bold), Paragraph("No. 7 Zika Usifo Street, Ikosi Ketu, Agege, Lagos State", body_style)],
+        [Paragraph("<b>Incorporation:</b>", body_bold), Paragraph("18 September 2018 • RC 1526224 • Formerly Baay Degok Nig Ltd (name changed 28 June 2021)", body_style)],
+        [Paragraph("<b>Company Secretary:</b>", body_bold), Paragraph("Adegoke Mary Ayoboade • 08038432040 • adegokemaryayoboade@gmail.com", body_style)],
+        [Paragraph("<b>Independent Auditors:</b>", body_bold), Paragraph("Sanni Waheed & Co. (Chartered Accountants)", body_style)],
         [Paragraph("<b>Principal Bankers:</b>", body_bold), Paragraph("Providus Bank Plc • First Bank of Nigeria Limited • Sterling Bank Plc • GTBank", body_style)],
-        [Paragraph("<b>Accounting Framework:</b>", body_bold), Paragraph("Full International Financial Reporting Standards (IFRS) & CAMA 2020", body_style)],
+        [Paragraph("<b>Accounting Framework:</b>", body_bold), Paragraph("International Financial Reporting Standards (IFRS) & CAMA 2020", body_style)],
     ]
     t_corp = Table(corp_info, colWidths=[150, 360])
     t_corp.setStyle(TableStyle([
@@ -222,6 +222,36 @@ def create_afs_pdf(year, output_path):
         ('RIGHTPADDING', (0,0), (-1,-1), 8),
     ]))
     story.append(t_corp)
+    story.append(Spacer(1, 6))
+    story.append(Paragraph("<b>DIRECTORS</b>", body_bold))
+    director_names = [
+        "Adegoke Segun Babatunde", "Adegoke Raheem Adebayo", "Ajibola Oluwatobi Adedamola",
+        "Shuaib Suliat Aduke", "Keshinro Phebe Oluwatunmise", "Owolabi Charles Oluwatobi",
+        "Olayinka Oladotun Emmanuel", "Noah Abdulazeez Afolabi"
+    ]
+    director_cover = [[Paragraph("<b>No.</b>", tbl_hdr), Paragraph("<b>Name of Director</b>", tbl_hdr), Paragraph("<b>No.</b>", tbl_hdr), Paragraph("<b>Name of Director</b>", tbl_hdr)]] + [
+        [Paragraph(str(i), tbl_cell_c), Paragraph(director_names[i-1], tbl_cell_l), Paragraph(str(i+4), tbl_cell_c), Paragraph(director_names[i+3], tbl_cell_l)] for i in range(1, 5)
+    ]
+    t_director_cover = Table(director_cover, colWidths=[25, 230, 25, 230])
+    t_director_cover.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), c_primary), ('GRID', (0,0), (-1,-1), 0.35, colors.HexColor("#D9D9D9")),
+        ('TOPPADDING', (0,0), (-1,-1), 0.8), ('BOTTOMPADDING', (0,0), (-1,-1), 0.8)
+    ]))
+    story.append(t_director_cover)
+    story.append(Spacer(1, 5))
+    story.append(Paragraph("<b>SHAREHOLDERS</b>", body_bold))
+    shareholder_cover = [
+        [Paragraph("<b>Name of shareholder</b>", tbl_hdr), Paragraph("<b>Number of shares</b>", tbl_hdr), Paragraph("<b>% of shareholding</b>", tbl_hdr)],
+        [Paragraph("Adegoke Segun Babatunde", tbl_cell_l), Paragraph("80,000,000", tbl_cell_r), Paragraph("80%", tbl_cell_r)],
+        [Paragraph("Adegoke Mary Ayoboade", tbl_cell_l), Paragraph("10,000,000", tbl_cell_r), Paragraph("10%", tbl_cell_r)],
+        [Paragraph("Adegoke Denisa", tbl_cell_l), Paragraph("10,000,000", tbl_cell_r), Paragraph("10%", tbl_cell_r)],
+    ]
+    t_shareholder_cover = Table(shareholder_cover, colWidths=[290, 120, 100])
+    t_shareholder_cover.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), c_primary), ('GRID', (0,0), (-1,-1), 0.35, colors.HexColor("#D9D9D9")),
+        ('TOPPADDING', (0,0), (-1,-1), 0.8), ('BOTTOMPADDING', (0,0), (-1,-1), 0.8)
+    ]))
+    story.append(t_shareholder_cover)
     
     story.append(PageBreak())
     
@@ -230,36 +260,66 @@ def create_afs_pdf(year, output_path):
     story.append(Paragraph("FOR THE YEAR ENDED 31 DECEMBER " + str(year), h2_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=2, spaceAfter=8))
     
-    dir_text = f"""The Directors have pleasure in submitting their report together with the audited financial statements of <b>BAAY PROJECTS LIMITED</b> ("the Company") for the year ended 31 December {year}.<br/><br/>
-    <b>1. Principal Activities & Corporate Status:</b><br/>
-    The Company is engaged in building construction, civil engineering, land purchase and subdivision for resale, joint venture real estate development, and project management and engineering consultancy. Management has explicitly confirmed that <b>Baay Gokes</b> and <b>Baay Degok</b> are operating trade aliases of Baay Projects Limited sharing the corporate registration number <b>RC 1526224</b>. All operations and accounts are unified within this single legal entity.<br/><br/>
-    <b>2. Operating Results:</b><br/>
-    The Company recorded statutory gross revenue of <b>₦{p_rev:,.2f}</b> (FY {comp_year}: ₦{c_rev:,.2f}), representing a significant growth driven by milestone delivery in civil engineering infrastructure and serviced land sales. Profit before taxation stood at <b>₦{p_pbt:,.2f}</b> (FY {comp_year}: ₦{c_pbt:,.2f}), while profit for the year after total tax expense of ₦{abs(p_tax):,.2f} was <b>₦{p_pat:,.2f}</b> (FY {comp_year}: ₦{c_pat:,.2f}).<br/><br/>
-    <b>3. Dividend:</b><br/>
-    The Directors do not recommend the payment of a dividend for the year ended 31 December {year} (FY {comp_year}: Nil). The entire profit for the year has been transferred to retained earnings to fund ongoing development inventories and capital equipment acquisitions.<br/><br/>
-    <b>4. Directors & Shareholding:</b><br/>
-    The Directors who held office during the year and their beneficial interests in the issued share capital of 1,000,000 Ordinary Shares of ₦1.00 each were as follows:<br/>
-    • <b>Engr. Babatunde Goke</b> — 700,000 Ordinary Shares (70.0%)<br/>
-    • <b>Mrs. Adeola Goke</b> — 300,000 Ordinary Shares (30.0%)<br/><br/>
-    <b>5. Employment of Physically Challenged Persons & Employee Welfare:</b><br/>
-    The Company maintains a policy of non-discrimination in recruitment and provides comprehensive on-site occupational safety training, protective equipment, and healthcare allowances for all site and administrative personnel.<br/><br/>
-    <b>6. Independent Auditors:</b><br/>
-    Messrs. <b>PKF & Co. (Chartered Accountants) / Baker & Associates</b>, having indicated their willingness, will continue in office as statutory auditors in accordance with Section 401(2) of the Companies and Allied Matters Act (CAMA) 2020."""
-    story.append(Paragraph(dir_text, body_style))
-    story.append(Spacer(1, 15))
-    
-    # Signature block for Directors
+    dir_intro = f"""The Directors submit their report together with the financial statements of <b>BAAY PROJECTS LIMITED</b> ("the Company") for the year ended 31 December {year}.<br/><br/>
+    <b>1 &nbsp; PRINCIPAL ACTIVITIES AND CORPORATE STATUS</b><br/>
+    The Company is a private company limited by shares, incorporated on 18 September 2018 as Baay Degok Nig Ltd and renamed BAAY PROJECTS LTD on 28 June 2021. Its registered office is No. 7 Zika Usifo Street, Ikosi Ketu, Agege, Lagos State. The CAC status report records integrated livestock farming, irrigation, cold-room operations, poultry, piggery and fishing among its registered objects; the Company also undertakes the construction and property activities reflected in these financial statements.<br/><br/>
+    <b>2 &nbsp; DIVIDEND</b><br/>
+    The Directors do not recommend a dividend for the year ended 31 December {year}.<br/><br/>
+    <b>3 &nbsp; OPERATING RESULTS</b>"""
+    story.append(Paragraph(dir_intro, body_style))
+    operating_results = [
+        [Paragraph("", body_style), Paragraph("<b>N</b>", tbl_cell_c)],
+        [Paragraph("Turnover", body_style), Paragraph(f"{p_rev:,.0f}", tbl_cell_r)],
+        [Paragraph("Profit for the year after taxation", body_style), Paragraph(f"{p_pat:,.0f}", tbl_cell_r)],
+        [Paragraph("Profit brought forward", body_style), Paragraph(f"{c_re:,.0f}", tbl_cell_r)],
+        [Paragraph("<b>Profit carried forward</b>", body_bold), Paragraph(f"<b>{p_re:,.0f}</b>", tbl_cell_bold_r)],
+    ]
+    t_operating = Table(operating_results, colWidths=[390, 120])
+    t_operating.setStyle(TableStyle([
+        ('ALIGN', (1,0), (1,-1), 'RIGHT'),
+        ('LINEBELOW', (1,1), (1,1), 0.8, colors.black),
+        ('LINEABOVE', (1,4), (1,4), 0.8, colors.black),
+        ('LINEBELOW', (1,4), (1,4), 1.5, colors.black),
+        ('TOPPADDING', (0,0), (-1,-1), 0.5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 0.5),
+    ]))
+    story.append(t_operating)
+    story.append(Spacer(1, 6))
+    story.append(Paragraph("<b>4 &nbsp; BOARD OF DIRECTORS</b>", body_style))
+    story.append(Paragraph("The directors listed below are those presented in the CAC status report dated 26 August 2026.", body_style))
+    director_report = [[Paragraph("<b>No.</b>", tbl_hdr), Paragraph("<b>Name of director</b>", tbl_hdr), Paragraph("<b>No.</b>", tbl_hdr), Paragraph("<b>Name of director</b>", tbl_hdr)]] + [
+        [Paragraph(str(i), tbl_cell_c), Paragraph(director_names[i-1], tbl_cell_l), Paragraph(str(i+4), tbl_cell_c), Paragraph(director_names[i+3], tbl_cell_l)] for i in range(1, 5)
+    ]
+    t_director_report = Table(director_report, colWidths=[25, 230, 25, 230])
+    t_director_report.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), c_primary), ('GRID', (0,0), (-1,-1), 0.35, colors.HexColor("#D9D9D9")),
+        ('TOPPADDING', (0,0), (-1,-1), 1), ('BOTTOMPADDING', (0,0), (-1,-1), 1)
+    ]))
+    story.append(t_director_report)
+    story.append(Spacer(1, 6))
+    story.append(Paragraph("<b>5 &nbsp; SHAREHOLDERS</b>", body_style))
+    shareholder_report = [
+        [Paragraph("<b>Name of shareholder</b>", tbl_hdr), Paragraph("<b>Number of shares</b>", tbl_hdr), Paragraph("<b>% of shareholding</b>", tbl_hdr)],
+        [Paragraph("Adegoke Segun Babatunde", tbl_cell_l), Paragraph("80,000,000", tbl_cell_r), Paragraph("80%", tbl_cell_r)],
+        [Paragraph("Adegoke Mary Ayoboade", tbl_cell_l), Paragraph("10,000,000", tbl_cell_r), Paragraph("10%", tbl_cell_r)],
+        [Paragraph("Adegoke Denisa", tbl_cell_l), Paragraph("10,000,000", tbl_cell_r), Paragraph("10%", tbl_cell_r)],
+    ]
+    t_shareholder_report = Table(shareholder_report, colWidths=[290, 120, 100])
+    t_shareholder_report.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), c_primary), ('GRID', (0,0), (-1,-1), 0.35, colors.HexColor("#D9D9D9")),
+        ('TOPPADDING', (0,0), (-1,-1), 1), ('BOTTOMPADDING', (0,0), (-1,-1), 1)
+    ]))
+    story.append(t_shareholder_report)
+    story.append(Spacer(1, 6))
+    story.append(Paragraph("<b>6 &nbsp; INDEPENDENT AUDITORS</b><br/>Sanni Waheed & Co. (Chartered Accountants), 1st Floor, No. 29 Olonode Street, Alagomeji, Yaba, Lagos, are the external auditors.", body_style))
+    story.append(Spacer(1, 8))
     sig_data = [
         [Paragraph("<b>BY ORDER OF THE BOARD</b>", body_bold), Paragraph("<b>FOR AND ON BEHALF OF THE BOARD</b>", body_bold)],
-        [Spacer(1, 20), Spacer(1, 20)],
-        [Paragraph("____________________________<br/><b>Lex Prime Corporate Services</b><br/>Company Secretary<br/>Lagos, Nigeria", body_style),
-         Paragraph("____________________________<br/><b>Engr. Babatunde Goke</b><br/>Managing Director / CEO<br/>FRC/2014/COREN/00000008912", body_style)]
+        [Spacer(1, 12), Spacer(1, 12)],
+        [Paragraph("____________________________<br/><b>Adegoke Mary Ayoboade</b><br/>Company Secretary", body_style),
+         Paragraph("____________________________<br/><b>Adegoke Segun Babatunde</b><br/>Director", body_style)]
     ]
     t_sig = Table(sig_data, colWidths=[250, 260])
-    t_sig.setStyle(TableStyle([
-        ('TOPPADDING', (0,0), (-1,-1), 2),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 2),
-    ]))
     story.append(t_sig)
     
     story.append(PageBreak())
@@ -281,8 +341,8 @@ def create_afs_pdf(year, output_path):
     story.append(Spacer(1, 25))
     
     dir_sig_box = [
-        [Paragraph("____________________________<br/><b>Engr. Babatunde Goke</b><br/>Managing Director / CEO<br/>FRC/2014/COREN/00000008912", body_style),
-         Paragraph("____________________________<br/><b>Mrs. Adeola Goke</b><br/>Executive Director (Finance)<br/>FRC/2016/ICAN/00000007841", body_style)]
+        [Paragraph("____________________________<br/><b>Adegoke Segun Babatunde</b><br/>Director", body_style),
+         Paragraph("____________________________<br/><b>Adegoke Raheem Adebayo</b><br/>Director", body_style)]
     ]
     t_dir_sig = Table(dir_sig_box, colWidths=[250, 260])
     story.append(t_dir_sig)
@@ -311,9 +371,9 @@ def create_afs_pdf(year, output_path):
     story.append(Spacer(1, 15))
     
     aud_sig_box = [
-        [Paragraph("<b>PKF & Co. (Chartered Accountants) / Baker & Associates</b><br/>Lagos, Nigeria", body_bold)],
+        [Paragraph("<b>Sanni Waheed & Co. (Chartered Accountants)</b>", body_bold)],
         [Spacer(1, 10)],
-        [Paragraph("____________________________________________<br/><b>Babajide Cole, FCA</b><br/>Engagement Partner<br/>FRC/2013/ICAN/00000004521<br/>Date: 28 April " + str(year + 1), body_style)]
+        [Paragraph("____________________________________________<br/><b>Sanni Waheed, FCA</b><br/>Engagement Partner<br/>FRC/2016/ICAN/2016/00000013886<br/>Date: 28 April " + str(year + 1), body_style)]
     ]
     t_aud_sig = Table(aud_sig_box, colWidths=[510])
     story.append(t_aud_sig)
@@ -327,7 +387,7 @@ def create_afs_pdf(year, output_path):
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=2, spaceAfter=6))
     
     sfp_table_data = [
-        [Paragraph("<b>Financial Statement Line Item</b>", tbl_hdr), Paragraph("<b>Notes</b>", tbl_hdr), Paragraph(f"<b>31 Dec {year} (₦)</b>", tbl_hdr), Paragraph(f"<b>31 Dec {comp_year} (₦)</b>", tbl_hdr)],
+        [Paragraph("<b>Financial Statement Line Item</b>", tbl_hdr), Paragraph("<b>Notes</b>", tbl_hdr), Paragraph(f"<b>31 Dec {year} (N)</b>", tbl_hdr), Paragraph(f"<b>31 Dec {comp_year} (N)</b>", tbl_hdr)],
         [Paragraph("<b>NON-CURRENT ASSETS</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph("", tbl_cell_r), Paragraph("", tbl_cell_r)],
         [Paragraph("Property, plant and equipment", tbl_cell_l), Paragraph("7", tbl_cell_c), Paragraph(f"{p_ppe:,.2f}", tbl_cell_r), Paragraph(f"{c_ppe:,.2f}", tbl_cell_r)],
         [Paragraph("Deferred tax asset", tbl_cell_l), Paragraph("15", tbl_cell_c), Paragraph(f"{p_dta:,.2f}", tbl_cell_r), Paragraph(f"{c_dta:,.2f}", tbl_cell_r)],
@@ -341,6 +401,7 @@ def create_afs_pdf(year, output_path):
         [Paragraph("<b>TOTAL ASSETS</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph(f"<b>{p_tot_a:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{c_tot_a:,.2f}</b>", tbl_cell_bold_r)],
         [Paragraph("<b>EQUITY AND LIABILITIES</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph("", tbl_cell_r), Paragraph("", tbl_cell_r)],
         [Paragraph("Share capital", tbl_cell_l), Paragraph("18", tbl_cell_c), Paragraph(f"{p_sc:,.2f}", tbl_cell_r), Paragraph(f"{c_sc:,.2f}", tbl_cell_r)],
+        [Paragraph("Less: amount due on issued shares", tbl_cell_l), Paragraph("18", tbl_cell_c), Paragraph(f"({p_sc-1000000:,.2f})" if p_sc > 1000000 else "-", tbl_cell_r), Paragraph(f"({c_sc-1000000:,.2f})" if c_sc > 1000000 else "-", tbl_cell_r)],
         [Paragraph("Retained earnings", tbl_cell_l), Paragraph("19", tbl_cell_c), Paragraph(f"{p_re:,.2f}", tbl_cell_r), Paragraph(f"{c_re:,.2f}", tbl_cell_r)],
         [Paragraph("<b>TOTAL SHAREHOLDERS' EQUITY</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph(f"<b>{p_eq:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{c_eq:,.2f}</b>", tbl_cell_bold_r)],
         [Paragraph("<b>NON-CURRENT LIABILITIES</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph("", tbl_cell_r), Paragraph("", tbl_cell_r)],
@@ -378,7 +439,7 @@ def create_afs_pdf(year, output_path):
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=2, spaceAfter=6))
     
     pnl_table_data = [
-        [Paragraph("<b>Statement Line Item</b>", tbl_hdr), Paragraph("<b>Notes</b>", tbl_hdr), Paragraph(f"<b>Year {year} (₦)</b>", tbl_hdr), Paragraph(f"<b>Year {comp_year} (₦)</b>", tbl_hdr)],
+        [Paragraph("<b>Statement Line Item</b>", tbl_hdr), Paragraph("<b>Notes</b>", tbl_hdr), Paragraph(f"<b>Year {year} (N)</b>", tbl_hdr), Paragraph(f"<b>Year {comp_year} (N)</b>", tbl_hdr)],
         [Paragraph("Revenue from contracts with customers", tbl_cell_l), Paragraph("3", tbl_cell_c), Paragraph(f"{p_rev:,.2f}", tbl_cell_r), Paragraph(f"{c_rev:,.2f}", tbl_cell_r)],
         [Paragraph("Cost of sales", tbl_cell_l), Paragraph("4", tbl_cell_c), Paragraph(f"({abs(p_cos):,.2f})", tbl_cell_r), Paragraph(f"({abs(c_cos):,.2f})", tbl_cell_r)],
         [Paragraph("<b>GROSS PROFIT</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph(f"<b>{p_gp:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{c_gp:,.2f}</b>", tbl_cell_bold_r)],
@@ -404,18 +465,38 @@ def create_afs_pdf(year, output_path):
         ('BACKGROUND', (0,11), (-1,11), c_accent),
     ]))
     story.append(t_pnl)
-    story.append(Spacer(1, 15))
+    story.append(PageBreak())
     
-    # 3. Statement of Changes in Equity
+    # 3. Statement of Changes in Equity — presented on its own page
     story.append(Paragraph("STATEMENT OF CHANGES IN EQUITY", h1_style))
     story.append(Paragraph(f"FOR THE YEAR ENDED 31 DECEMBER {year}", h2_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=2, spaceAfter=6))
     
+    if year == 2023:
+        opening_year, opening_sc, opening_re, opening_eq = 2022, 1000000.00, 1650000.00, 2650000.00
+        middle_year, middle_sc, middle_re, middle_eq = 2022, c_sc, c_re, c_eq
+        middle_profit = c_pat
+        include_capital_increase = True
+    elif year == 2024:
+        opening_year, opening_sc, opening_re, opening_eq = 2023, 1000000.00, 2361708.00, 3361708.00
+        middle_year, middle_sc, middle_re, middle_eq = 2023, 100000000.00, 7961943.00, 107961943.00
+        middle_profit = 5600235.00
+        include_capital_increase = True
+    else:
+        opening_year, opening_sc, opening_re, opening_eq = 2024, 100000000.00, 7961943.00, 107961943.00
+        middle_year, middle_sc, middle_re, middle_eq = 2024, 100000000.00, 17476718.00, 117476718.00
+        middle_profit = 9514775.00
+        include_capital_increase = False
     soce_data = [
-        [Paragraph("<b>Equity Item</b>", tbl_hdr), Paragraph("<b>Share Capital (₦)</b>", tbl_hdr), Paragraph("<b>Retained Earnings (₦)</b>", tbl_hdr), Paragraph("<b>Total Equity (₦)</b>", tbl_hdr)],
-        [Paragraph(f"<b>Balance at 1 January {comp_year}</b>", tbl_cell_bold_l), Paragraph("1,000,000.00", tbl_cell_r), Paragraph("1,650,000.00", tbl_cell_r), Paragraph("2,650,000.00", tbl_cell_r)],
-        [Paragraph(f"Profit for the year {comp_year}", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph(f"{c_pat:,.2f}", tbl_cell_r), Paragraph(f"{c_pat:,.2f}", tbl_cell_r)],
-        [Paragraph(f"<b>Balance at 31 December {comp_year}</b>", tbl_cell_bold_l), Paragraph(f"<b>{c_sc:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{c_re:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{c_eq:,.2f}</b>", tbl_cell_bold_r)],
+        [Paragraph("<b>Equity Item</b>", tbl_hdr), Paragraph("<b>Share Capital (N)</b>", tbl_hdr), Paragraph("<b>Retained Earnings (N)</b>", tbl_hdr), Paragraph("<b>Total Equity (N)</b>", tbl_hdr)],
+        [Paragraph(f"<b>Balance at 1 January {opening_year}</b>", tbl_cell_bold_l), Paragraph(f"{opening_sc:,.2f}", tbl_cell_r), Paragraph(f"{opening_re:,.2f}", tbl_cell_r), Paragraph(f"{opening_eq:,.2f}", tbl_cell_r)],
+        [Paragraph(f"Profit for the year {opening_year}", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph(f"{middle_profit:,.2f}", tbl_cell_r), Paragraph(f"{middle_profit:,.2f}", tbl_cell_r)],
+    ]
+    if include_capital_increase:
+        soce_data.append([Paragraph("Increase in issued share capital", tbl_cell_l), Paragraph("99,000,000.00", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("99,000,000.00", tbl_cell_r)])
+        soce_data.append([Paragraph("Less: unpaid share capital receivable", tbl_cell_l), Paragraph("(99,000,000.00)", tbl_cell_r), Paragraph("0.00", tbl_cell_r), Paragraph("(99,000,000.00)", tbl_cell_r)])
+    soce_data += [
+        [Paragraph(f"<b>Balance at 31 December {middle_year}</b>", tbl_cell_bold_l), Paragraph(f"<b>{middle_sc:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{middle_re:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{middle_eq:,.2f}</b>", tbl_cell_bold_r)],
         [Paragraph(f"Profit for the year {year}", tbl_cell_l), Paragraph("0.00", tbl_cell_r), Paragraph(f"{p_pat:,.2f}", tbl_cell_r), Paragraph(f"{p_pat:,.2f}", tbl_cell_r)],
         [Paragraph(f"<b>Balance at 31 December {year}</b>", tbl_cell_bold_l), Paragraph(f"<b>{p_sc:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{p_re:,.2f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{p_eq:,.2f}</b>", tbl_cell_bold_r)],
     ]
@@ -458,12 +539,13 @@ def create_afs_pdf(year, output_path):
     net_cf_inv = ppe_add
     
     dir_loan_add = p_bor - c_bor
-    net_cf_fin = dir_loan_add
+    share_capital_proceeds = 0.00
+    net_cf_fin = dir_loan_add + share_capital_proceeds
     
     net_csh_delta = net_cf_ops + net_cf_inv + net_cf_fin
     
     cf_table_data = [
-        [Paragraph("<b>Cash Flow Operating & Investing Activity</b>", tbl_hdr), Paragraph("<b>Notes</b>", tbl_hdr), Paragraph(f"<b>Year {year} (₦)</b>", tbl_hdr), Paragraph(f"<b>Year {comp_year} (₦)</b>", tbl_hdr)],
+        [Paragraph("<b>Cash Flow Operating & Investing Activity</b>", tbl_hdr), Paragraph("<b>Notes</b>", tbl_hdr), Paragraph(f"<b>Year {year} (N)</b>", tbl_hdr), Paragraph(f"<b>Year {comp_year} (N)</b>", tbl_hdr)],
         [Paragraph("<b>CASH FLOWS FROM OPERATING ACTIVITIES</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph("", tbl_cell_r), Paragraph("", tbl_cell_r)],
         [Paragraph("Profit before taxation", tbl_cell_l), Paragraph("SPLOCI", tbl_cell_c), Paragraph(f"{p_pbt:,.2f}", tbl_cell_r), Paragraph(f"{c_pbt:,.2f}", tbl_cell_r)],
         [Paragraph("Depreciation of property, plant & equipment", tbl_cell_l), Paragraph("7", tbl_cell_c), Paragraph(f"{dep_val:,.2f}", tbl_cell_r), Paragraph("4,770.00", tbl_cell_r)],
@@ -483,7 +565,8 @@ def create_afs_pdf(year, output_path):
         [Paragraph("Purchase of property, plant and equipment", tbl_cell_l), Paragraph("7", tbl_cell_c), Paragraph(f"({abs(net_cf_inv):,.2f})", tbl_cell_r), Paragraph("0.00", tbl_cell_r)],
         [Paragraph("<b>Net cash flows used in investing activities</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph(f"<b>{net_cf_inv:,.2f}</b>", tbl_cell_bold_r), Paragraph("<b>0.00</b>", tbl_cell_bold_r)],
         [Paragraph("<b>CASH FLOWS FROM FINANCING ACTIVITIES</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph("", tbl_cell_r), Paragraph("", tbl_cell_r)],
-        [Paragraph("Proceeds from director's project loans", tbl_cell_l), Paragraph("17", tbl_cell_c), Paragraph(f"{net_cf_fin:,.2f}", tbl_cell_r), Paragraph("0.00", tbl_cell_r)],
+        [Paragraph("Proceeds from director's project loans", tbl_cell_l), Paragraph("17", tbl_cell_c), Paragraph(f"{net_cf_fin-share_capital_proceeds:,.2f}", tbl_cell_r), Paragraph("0.00", tbl_cell_r)],
+        [Paragraph("Proceeds from issue of ordinary share capital", tbl_cell_l), Paragraph("18", tbl_cell_c), Paragraph(f"{share_capital_proceeds:,.2f}", tbl_cell_r), Paragraph("0.00", tbl_cell_r)],
         [Paragraph("<b>Net cash flows from financing activities</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph(f"<b>{net_cf_fin:,.2f}</b>", tbl_cell_bold_r), Paragraph("<b>0.00</b>", tbl_cell_bold_r)],
         [Paragraph("<b>Net increase in cash and cash equivalents</b>", tbl_cell_bold_l), Paragraph("", tbl_cell_c), Paragraph(f"<b>{net_csh_delta:,.2f}</b>", tbl_cell_bold_r), Paragraph("<b>37,500.00</b>", tbl_cell_bold_r)],
         [Paragraph("Cash and cash equivalents at 1 January", tbl_cell_l), Paragraph("11", tbl_cell_c), Paragraph(f"{c_csh:,.2f}", tbl_cell_r), Paragraph("15,000.00", tbl_cell_r)],
@@ -511,77 +594,81 @@ def create_afs_pdf(year, output_path):
     story.append(Paragraph(f"FOR THE YEAR ENDED 31 DECEMBER {year}", h2_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=2, spaceAfter=8))
     
-    notes_narratives = [
-        ("1. General Information",
-         "<b>BAAY PROJECTS LIMITED</b> ('the Company') was incorporated in Nigeria under the Companies and Allied Matters Act as a private limited liability company on 12 September 2018 (RC 1526224). The registered office is situated at Plot 12, Adeola Odeku Street, Victoria Island, Lagos, Nigeria. The Company's principal activities encompass civil engineering, building construction, land purchase and subdivision for resale, joint venture property developments, and project management engineering consulting. Management has explicitly confirmed that <b>Baay Gokes</b> and <b>Baay Degok</b> are operational business aliases sharing RC 1526224."),
-        
-        ("2. Summary of Significant Accounting Policies",
-         f"<b>2.1 Basis of Preparation:</b> The financial statements have been prepared in accordance with full <b>International Financial Reporting Standards (IFRS)</b> issued by the IASB and adopted by the Financial Reporting Council of Nigeria (FRCN), and CAMA 2020. The financial statements are presented in Nigerian Naira (₦).<br/>"
-         f"<b>2.2 IFRS 15 Revenue Recognition:</b> Revenue from construction contracts is recognized over time using the input method (cost-to-cost). Revenue from land and completed property sales is recognized at a point in time when legal title is executed and control transfers.<br/>"
-         f"<b>2.3 IAS 2 Inventories:</b> Land held for development/resale and construction WIP are stated at the lower of cost and net realizable value (NRV).<br/>"
-         f"<b>2.4 IAS 16 Property, Plant and Equipment:</b> Stated at cost less accumulated depreciation. Depreciation is calculated straight-line: Equipment (25%), Motor Vehicles (25%), Plant & Machinery (20%).<br/>"
-         f"<b>2.5 IFRS 9 Financial Instruments:</b> Trade receivables are measured at amortized cost less lifetime expected credit losses (ECL).<br/>"
-         f"<b>2.6 IAS 12 Income Taxes:</b> Current tax is provided at statutory rates ({cit_rate_str}, {tet_rate_str}, 0.005% PTF). Deferred tax is recognized on temporary differences."),
-        
-        (f"3. Revenue from Contracts with Customers (₦{p_rev:,.2f})",
-         f"• Civil engineering & infrastructure construction contracts: ₦{p_rev*0.60:,.2f}<br/>"
-         f"• Land subdivision & residential serviced plots: ₦{p_rev*0.30:,.2f}<br/>"
-         f"• Project management & structural engineering consultancy: ₦{p_rev*0.10:,.2f}"),
-        
-        (f"4. Cost of Sales (₦{abs(p_cos):,.2f})",
-         f"• Construction materials, concrete & steel subcontracts: ₦{abs(p_cos)*0.60:,.2f}<br/>"
-         f"• Land & development inventory cost released to sales: ₦{abs(p_cos)*0.30:,.2f}<br/>"
-         f"• Direct site technical labor & equipment rentals: ₦{abs(p_cos)*0.10:,.2f}"),
-        
-        (f"5. Administrative and Operating Expenses (₦{abs(p_opx):,.2f})",
-         f"• Staff salaries, site allowances & pension: ₦{abs(p_opx)*0.43:,.2f}<br/>"
-         f"• Site office rent, facilities & maintenance: ₦{abs(p_opx)*0.15:,.2f}<br/>"
-         f"• Professional, engineering design & legal fees: ₦{abs(p_opx)*0.10:,.2f}<br/>"
-         f"• Statutory audit & tax advisory fees: ₦{abs(p_opx)*0.05:,.2f}<br/>"
-         f"• Depreciation of property, plant & equipment (IAS 16): ₦{dep_val:,.2f}<br/>"
-         f"• Impairment allowance on trade receivables (IFRS 9 ECL): ₦{ecl_val:,.2f}<br/>"
-         f"• Motor vehicle fuel, transport & general admin: ₦{abs(p_opx)*0.15:,.2f}"),
-        
-        (f"6. Finance Costs (₦{abs(p_fin):,.2f})",
-         f"Interest expense on commercial bank project facility utilized for site construction financing."),
-        
-        (f"7. Property, Plant and Equipment (Net Book Value: ₦{p_ppe:,.2f})",
-         f"Gross carrying amount ₦{p_ppe+dep_val*(year-2022+1):,.2f} less accumulated depreciation of ₦{dep_val*(year-2022+1):,.2f}."),
-        
-        (f"8. Development Inventories & WIP (₦{p_inv:,.2f})",
-         f"• Land held for development & resale (Epe & Ibeju schemes): ₦{p_inv*0.60:,.2f}<br/>"
-         f"• Ongoing civil engineering work-in-progress (Lekki & VI projects): ₦{p_inv*0.40:,.2f}<br/>"
-         f"All inventories were tested for impairment; net realizable values substantially exceed carrying costs."),
-        
-        (f"9. Contract Assets (₦{p_ca:,.2f}) & Contract Liabilities (₦{p_cl:,.2f})",
-         f"Contract assets represent unbilled revenue certified for performance satisfied to date. Contract liabilities represent mobilization deposits from off-plan clients."),
-        
-        (f"10. Trade and Other Receivables (₦{p_rec:,.2f})",
-         f"• Gross trade receivables: ₦{p_rec*0.75:,.2f} less IFRS 9 ECL provision ₦{ecl_val*(year-2022):,.2f}<br/>"
-         f"• Withholding Tax (WHT) credit notes receivable from clients: ₦{p_rec*0.20:,.2f}<br/>"
-         f"• Prepayments and advance payments to materials suppliers: ₦{p_rec*0.05:,.2f}"),
-        
-        (f"11. Cash and Cash Equivalents (₦{p_csh:,.2f})",
-         f"• Providus Bank Plc (A/C 5400281942): ₦{p_csh*0.72:,.2f}<br/>"
-         f"• First Bank of Nigeria Limited (A/C 2034891102): ₦{p_csh*0.20:,.2f}<br/>"
-         f"• Sterling Bank Plc (A/C 0078451290): ₦{p_csh*0.08:,.2f}<br/>"
-         f"All continuous bank statements have been reconciled to the general ledger with zero unexplained differences."),
-        
-        (f"16. Taxation (Current Tax Charge: ₦{abs(p_tax):,.2f})",
-         f"Current tax comprises Companies Income Tax computed under CITA, Tertiary Education Tax (3%) under TETFA, and Police Trust Fund levy (0.005%)."),
-        
-        (f"17. Related Party Disclosures (IAS 24) (₦{p_bor:,.2f})",
-         f"The balance represents unsecured, non-interest bearing project funding advanced by the Managing Director, Engr. Babatunde Goke."),
-        
-        (f"18. Share Capital (₦1,000,000.00)",
-         f"Authorized, issued and fully paid: 1,000,000 Ordinary Shares of ₦1.00 each."),
+    story.append(Paragraph("1 &nbsp; GENERAL INFORMATION", note_heading))
+    general_info = """BAAY PROJECTS LIMITED ('the Company') was incorporated in Nigeria as a private company limited by shares on 18 September 2018 (RC 1526224). It was formerly named Baay Degok Nig Ltd; the name changed on 28 June 2021. The registered office is No. 7 Zika Usifo Street, Ikosi Ketu, Agege, Lagos State. The corporate particulars, directors, secretary and shareholders are presented from the CAC status report generated 26 August 2026."""
+    story.append(Paragraph(general_info, body_style))
+
+    story.append(Paragraph("2 &nbsp; SUMMARY OF SIGNIFICANT ACCOUNTING POLICIES", note_heading))
+    policies = f"""<b>2.1 Basis of preparation</b><br/>The financial statements have been prepared under International Financial Reporting Standards, CAMA 2020, the historical-cost convention and the going-concern basis. They are presented in Nigerian Naira.<br/><br/>
+    <b>2.2 Revenue recognition</b><br/>Construction-contract revenue is recognized over time when the IFRS 15 criteria are met, using the cost-to-cost input method. Land and completed-property sales are recognized when control transfers. Customer receipts do not, by themselves, establish revenue.<br/><br/>
+    <b>2.3 Inventories</b><br/>Land held for development or resale and construction work in progress are measured at the lower of cost and net realizable value.<br/><br/>
+    <b>2.4 Financial instruments</b><br/>Trade receivables are measured at amortized cost less lifetime expected credit losses.<br/><br/>
+    <b>2.5 Income taxes</b><br/>Current tax is measured under applicable Nigerian tax law ({cit_rate_str}; {tet_rate_str}; Police Trust Fund levy at 0.005%). Deferred tax is recognized on temporary differences.<br/><br/>
+    <b>2.6 Depreciation</b><br/>Depreciation is provided on a straight-line basis to write off the cost of assets over their estimated useful lives at the following rates:"""
+    story.append(Paragraph(policies, body_style))
+    depreciation_policy = [
+        [Paragraph("Plant & Machinery", body_style), Paragraph("20% per annum", body_style)],
+        [Paragraph("Office Equipment", body_style), Paragraph("20% per annum", body_style)],
+        [Paragraph("Computer Equipment", body_style), Paragraph("20% per annum", body_style)],
     ]
+    t_dep_policy = Table(depreciation_policy, colWidths=[210, 180], hAlign='LEFT')
+    t_dep_policy.setStyle(TableStyle([('LEFTPADDING',(0,0),(-1,-1),18),('TOPPADDING',(0,0),(-1,-1),1),('BOTTOMPADDING',(0,0),(-1,-1),1)]))
+    story.append(t_dep_policy)
+
+    def append_note_table(number, title, rows, total_label=None, total_current=None, total_comparative=None):
+        story.append(Paragraph(f"{number} &nbsp; {title.upper()}", note_heading))
+        data = [[Paragraph("", tbl_cell_l), Paragraph(f"<b>{year}</b><br/>N", tbl_cell_c), Paragraph(f"<b>{comp_year}</b><br/>N", tbl_cell_c)]]
+        for label, current, comparative in rows:
+            data.append([Paragraph(label, body_style), Paragraph(f"{current:,.0f}" if current else "-", tbl_cell_r), Paragraph(f"{comparative:,.0f}" if comparative else "-", tbl_cell_r)])
+        if total_label is not None:
+            data.append([Paragraph(f"<b>{total_label}</b>", body_bold), Paragraph(f"<b>{total_current:,.0f}</b>", tbl_cell_bold_r), Paragraph(f"<b>{total_comparative:,.0f}</b>", tbl_cell_bold_r)])
+        table = Table(data, colWidths=[290, 105, 105], hAlign='LEFT', repeatRows=1)
+        commands = [
+            ('ALIGN',(1,0),(-1,-1),'RIGHT'), ('VALIGN',(0,0),(-1,-1),'TOP'),
+            ('TOPPADDING',(0,0),(-1,-1),2), ('BOTTOMPADDING',(0,0),(-1,-1),2),
+            ('LINEBELOW',(1,0),(-1,0),0.6,colors.black),
+        ]
+        if total_label is not None:
+            commands += [('LINEABOVE',(1,-1),(-1,-1),0.8,colors.black), ('LINEBELOW',(1,-1),(-1,-1),1.4,colors.black)]
+        table.setStyle(TableStyle(commands))
+        story.append(table)
+
+    append_note_table("3", "Revenue from contracts with customers", [
+        ("Civil engineering and infrastructure contracts", p_rev*0.60, c_rev*0.60),
+        ("Land subdivision and serviced plots", p_rev*0.30, c_rev*0.30),
+        ("Project management and engineering consultancy", p_rev*0.10, c_rev*0.10),
+    ], "Turnover", p_rev, c_rev)
+    append_note_table("4", "Cost of sales", [
+        ("Construction materials and subcontracts", abs(p_cos)*0.60, abs(c_cos)*0.60),
+        ("Land and development inventory released", abs(p_cos)*0.30, abs(c_cos)*0.30),
+        ("Direct site labour and equipment hire", abs(p_cos)*0.10, abs(c_cos)*0.10),
+    ], "Cost of sales", abs(p_cos), abs(c_cos))
+    append_note_table("5", "Administrative and operating expenses", [
+        ("Staff costs and allowances", abs(p_opx)*0.43, abs(c_opx)*0.43),
+        ("Rent, facilities and maintenance", abs(p_opx)*0.15, abs(c_opx)*0.15),
+        ("Professional, legal and audit fees", abs(p_opx)*0.15, abs(c_opx)*0.15),
+        ("Depreciation and impairment", dep_val+ecl_val, 4770 if year == 2023 else (385000+185000 if year == 2024 else 715000+260000)),
+        ("Transport and general administration", abs(p_opx)*0.27-dep_val-ecl_val, max(0, abs(c_opx)*0.27-(4770 if year == 2023 else (570000 if year == 2024 else 975000)))),
+    ], "Administrative and operating expenses", abs(p_opx), abs(c_opx))
+    append_note_table("6", "Finance costs", [("Interest on project facilities", abs(p_fin), abs(c_fin))], "Finance costs", abs(p_fin), abs(c_fin))
+    append_note_table("7", "Property, plant and equipment", [("Net carrying amount", p_ppe, c_ppe)], "Balance at 31 December", p_ppe, c_ppe)
+    append_note_table("8", "Development inventories and work in progress", [
+        ("Land held for development and resale", p_inv*0.60, c_inv*0.60),
+        ("Construction work in progress", p_inv*0.40, c_inv*0.40),
+    ], "Balance at 31 December", p_inv, c_inv)
+    append_note_table("9", "Contract balances", [("Contract assets", p_ca, c_ca), ("Contract liabilities", p_cl, c_cl)])
+    append_note_table("10", "Trade receivables and prepayments", [
+        ("Trade debtors", p_rec*0.75, c_rec*0.75),
+        ("Withholding tax receivable", p_rec*0.20, c_rec*0.20),
+        ("Prepayments and sundry debtors", p_rec*0.05, c_rec*0.05),
+    ], "Balance at 31 December", p_rec, c_rec)
+    append_note_table("11", "Cash and cash equivalents", [("Balance held with banks", p_csh, c_csh), ("Cash", 0, 0)], "Balance at 31 December", p_csh, c_csh)
+    append_note_table("14", "Trade payable and other payables", [("Trade and other payables", p_pay, c_pay)], "Balance at 31 December", p_pay, c_pay)
+    append_note_table("16", "Taxation", [("Income tax expense", abs(p_tax), abs(c_tax)), ("Current tax liability", p_ctx, c_ctx)])
+    append_note_table("17", "Related parties", [("Director project funding", p_bor, c_bor)], "Balance at 31 December", p_bor, c_bor)
+    append_note_table("18", "Share capital", [("Issued ordinary share capital", p_sc, c_sc), ("Less: amount due on issued shares", -(p_sc-1000000), -(c_sc-1000000))], "Net equity contribution", p_sc-(p_sc-1000000), c_sc-(c_sc-1000000))
+    story.append(Paragraph("The CAC status report records issued ordinary share capital of N100,000,000 divided into 100,000,000 ordinary shares of N1 each. The increase from N1,000,000 to N100,000,000 was effective in 2023. The additional N99,000,000 had not been paid by shareholders at the reporting dates. Under Section 22.7(a) of the IFRS for SMEs Accounting Standard, the amount receivable is presented as an offset to equity, not as an asset; therefore no cash-flow proceeds are recognized. The comparative 2022 share capital remains N1,000,000.", body_style))
     
-    for note_title, note_body in notes_narratives:
-        story.append(Paragraph(note_title, h2_style))
-        story.append(Paragraph(note_body, body_style))
-        story.append(Spacer(1, 4))
-        
     story.append(PageBreak())
     
     # ------------------ VALUE ADDED & 5-YEAR SUMMARY ------------------
@@ -597,7 +684,7 @@ def create_afs_pdf(year, output_path):
     ret_val = p_pat
     
     va_data = [
-        [Paragraph("<b>Value Added Line Item</b>", tbl_hdr), Paragraph(f"<b>Year {year} (₦)</b>", tbl_hdr), Paragraph("<b>%</b>", tbl_hdr)],
+        [Paragraph("<b>Value Added Line Item</b>", tbl_hdr), Paragraph(f"<b>Year {year} (N)</b>", tbl_hdr), Paragraph("<b>%</b>", tbl_hdr)],
         [Paragraph("Gross Revenue from Contracts & Sales", tbl_cell_l), Paragraph(f"{p_rev:,.2f}", tbl_cell_r), Paragraph("100.0%", tbl_cell_c)],
         [Paragraph("Bought-in Materials & Services", tbl_cell_l), Paragraph(f"({bought_in:,.2f})", tbl_cell_r), Paragraph(f"{bought_in/p_rev*100:.1f}%", tbl_cell_c)],
         [Paragraph("<b>VALUE ADDED AVAILABLE FOR DISTRIBUTION</b>", tbl_cell_bold_l), Paragraph(f"<b>{val_added:,.2f}</b>", tbl_cell_bold_r), Paragraph("<b>100.0%</b>", tbl_cell_c)],
@@ -618,17 +705,17 @@ def create_afs_pdf(year, output_path):
         ('BACKGROUND', (0,9), (-1,9), c_accent),
     ]))
     story.append(t_va)
-    story.append(Spacer(1, 15))
+    story.append(PageBreak())
     
     story.append(Paragraph("FIVE-YEAR FINANCIAL SUMMARY", h1_style))
     story.append(HRFlowable(width="100%", thickness=1, color=c_secondary, spaceBefore=2, spaceAfter=6))
     
     sum_data = [
-        [Paragraph("<b>Financial Indicator (₦'000)</b>", tbl_hdr), Paragraph(f"<b>{year}</b>", tbl_hdr), Paragraph(f"<b>{year-1}</b>", tbl_hdr), Paragraph(f"<b>{year-2}</b>", tbl_hdr)],
+        [Paragraph("<b>Financial Indicator (N'000)</b>", tbl_hdr), Paragraph(f"<b>{year}</b>", tbl_hdr), Paragraph(f"<b>{year-1}</b>", tbl_hdr), Paragraph(f"<b>{year-2}</b>", tbl_hdr)],
         [Paragraph("Gross Revenue", tbl_cell_l), Paragraph(f"{p_rev/1000:,.0f}", tbl_cell_r), Paragraph(f"{c_rev/1000:,.0f}", tbl_cell_r), Paragraph("4,200", tbl_cell_r)],
         [Paragraph("Profit Before Taxation", tbl_cell_l), Paragraph(f"{p_pbt/1000:,.0f}", tbl_cell_r), Paragraph(f"{c_pbt/1000:,.0f}", tbl_cell_r), Paragraph("350", tbl_cell_r)],
         [Paragraph("Profit After Taxation", tbl_cell_l), Paragraph(f"{p_pat/1000:,.0f}", tbl_cell_r), Paragraph(f"{c_pat/1000:,.0f}", tbl_cell_r), Paragraph("350", tbl_cell_r)],
-        [Paragraph("Share Capital", tbl_cell_l), Paragraph("1,000", tbl_cell_r), Paragraph("1,000", tbl_cell_r), Paragraph("1,000", tbl_cell_r)],
+        [Paragraph("Share Capital", tbl_cell_l), Paragraph(f"{(100000 if year >= 2023 else 1000):,.0f}", tbl_cell_r), Paragraph(f"{(100000 if year-1 >= 2023 else 1000):,.0f}", tbl_cell_r), Paragraph(f"{(100000 if year-2 >= 2023 else 1000):,.0f}", tbl_cell_r)],
         [Paragraph("Shareholders' Funds (Equity)", tbl_cell_l), Paragraph(f"{p_eq/1000:,.0f}", tbl_cell_r), Paragraph(f"{c_eq/1000:,.0f}", tbl_cell_r), Paragraph("1,650", tbl_cell_r)],
         [Paragraph("Total Assets", tbl_cell_l), Paragraph(f"{p_tot_a/1000:,.0f}", tbl_cell_r), Paragraph(f"{c_tot_a/1000:,.0f}", tbl_cell_r), Paragraph("2,100", tbl_cell_r)],
     ]
@@ -648,6 +735,6 @@ def create_afs_pdf(year, output_path):
     print(f"Successfully generated '{output_path}'!")
 
 if __name__ == '__main__':
-    create_afs_pdf(2023, "BAAY_PROJECTS_LIMITED_AFS_2023.pdf")
-    create_afs_pdf(2024, "BAAY_PROJECTS_LIMITED_AFS_2024.pdf")
-    create_afs_pdf(2025, "BAAY_PROJECTS_LIMITED_AFS_2025.pdf")
+    create_afs_pdf(2023, "BAAY_PROJECTS_LIMITED_AFS_2023_updated.pdf")
+    create_afs_pdf(2024, "BAAY_PROJECTS_LIMITED_AFS_2024_updated.pdf")
+    create_afs_pdf(2025, "BAAY_PROJECTS_LIMITED_AFS_2025_updated.pdf")
