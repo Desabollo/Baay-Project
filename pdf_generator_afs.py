@@ -163,6 +163,7 @@ def create_afs_pdf(year, output_path):
     body_style = ParagraphStyle('Body', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=11.5, textColor=c_dark)
     body_bold = ParagraphStyle('BodyBold', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=8.5, leading=11.5, textColor=c_dark)
     body_italic = ParagraphStyle('BodyItalic', parent=styles['Normal'], fontName='Helvetica-Oblique', fontSize=8, leading=11, textColor=colors.HexColor("#595959"))
+    cover_comparative_style = ParagraphStyle('CoverComparative', parent=body_italic, alignment=1)
     
     tbl_hdr = ParagraphStyle('TblHdr', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=8, leading=10, textColor=colors.white, alignment=1)
     tbl_cell_l = ParagraphStyle('TblCellL', parent=styles['Normal'], fontName='Helvetica', fontSize=8, leading=10, textColor=c_dark, alignment=0)
@@ -177,7 +178,7 @@ def create_afs_pdf(year, output_path):
     story.append(Spacer(1, 40))
     story.append(Paragraph("BAAY PROJECTS LIMITED", title_style))
     story.append(Spacer(1, 6))
-    story.append(Paragraph("(Incorporated in the Federal Republic of Nigeria • RC 1526224 • TIN 21548976-0001)", subtitle_style))
+    story.append(Paragraph("(RC 1526224 • TIN 21548976-0001)", subtitle_style))
     story.append(Spacer(1, 15))
     story.append(HRFlowable(width="100%", thickness=3, color=c_primary, spaceBefore=5, spaceAfter=20))
     
@@ -186,7 +187,7 @@ def create_afs_pdf(year, output_path):
     story.append(Spacer(1, 10))
     story.append(Paragraph(f"FOR THE YEAR ENDED 31 DECEMBER {year}", subtitle_style))
     story.append(Spacer(1, 6))
-    story.append(Paragraph(f"(With Comparative Figures for the Year Ended 31 December {comp_year})", body_italic))
+    story.append(Paragraph(f"(With Comparative Figures for the Year Ended 31 December {comp_year})", cover_comparative_style))
     story.append(Spacer(1, 20))
     
     # Badge
@@ -206,8 +207,8 @@ def create_afs_pdf(year, output_path):
     corp_info = [
         [Paragraph("<b>Registered Corporate Office:</b>", body_bold), Paragraph("No. 7 Zika Usifo Street, Ikosi Ketu, Agege, Lagos State", body_style)],
         [Paragraph("<b>Incorporation:</b>", body_bold), Paragraph("18 September 2018 • RC 1526224 • Formerly Baay Degok Nig Ltd (name changed 28 June 2021)", body_style)],
-        [Paragraph("<b>Company Secretary:</b>", body_bold), Paragraph("Adegoke Mary Ayoboade • 08038432040 • adegokemaryayoboade@gmail.com", body_style)],
-        [Paragraph("<b>Independent Auditors:</b>", body_bold), Paragraph("Sanni Waheed & Co. (Chartered Accountants)", body_style)],
+        [Paragraph("<b>Company Secretary:</b>", body_bold), Paragraph("Adegoke Mary Ayoboade", body_style)],
+        [Paragraph("<b>Independent Auditors:</b>", body_bold), Paragraph("Sanni Waheed & Co. (Chartered Accountants), 1st Floor, No. 29 Olonode Street, Alagomeji, Yaba, Lagos", body_style)],
         [Paragraph("<b>Principal Bankers:</b>", body_bold), Paragraph("Providus Bank Plc • First Bank of Nigeria Limited • Sterling Bank Plc • GTBank", body_style)],
         [Paragraph("<b>Accounting Framework:</b>", body_bold), Paragraph("International Financial Reporting Standards (IFRS) & CAMA 2020", body_style)],
     ]
