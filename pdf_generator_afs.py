@@ -11,6 +11,10 @@ from pdf_numbered_canvas import NumberedCanvas
 print("Writing PDF generator for Annual Audited Financial Statements...")
 
 def create_afs_pdf(year, output_path):
+    """Write the signature financial statements. Do not restore the earlier illustrative figures."""
+    from revised.write_final_afs import build
+    build(year, output_path)
+    return
     # Year-specific setup
     comp_year = year - 1
     
