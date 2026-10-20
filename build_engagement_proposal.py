@@ -343,6 +343,12 @@ def make_table(doc, rows, cols, widths):
     t = doc.add_table(rows=rows, cols=cols)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     set_col_widths(t, widths)
+    # explicit total width (dxa) - prevents Word re-flowing columns on open
+    tblPr = t._tbl.tblPr
+    for existing in tblPr.findall(qn("w:tblW")):
+        tblPr.remove(existing)
+    total = int(sum(Cm(w).twips for w in widths))
+    tblPr.append(_el("w:tblW", **{"w:w": str(total), "w:type": "dxa"}))
     return t
 
 
@@ -540,6 +546,12 @@ normal.font.size = Pt(10.5)
 normal.font.color.rgb = RGBColor.from_string(GREY)
 normal.paragraph_format.space_after = Pt(6)
 normal.paragraph_format.line_spacing = 1.28
+_rpr = normal.element.get_or_add_rPr()
+_lang = OxmlElement("w:lang")
+_lang.set(qn("w:val"), "en-GB")
+_lang.set(qn("w:eastAsia"), "en-GB")
+_lang.set(qn("w:bidi"), "ar-SA")
+_rpr.append(_lang)
 
 section = doc.sections[0]
 section.page_width = PAGE_W
@@ -625,7 +637,7 @@ t = make_table(doc, 1, 3, [CONTENT_W_CM / 3] * 3)
 no_borders(t)
 for i, (top, big, sub) in enumerate([
     ("Integrated accounting", "\u20A62.5m", "Zoho Books setup, fixed fee"),
-    ("Tax compliance", "Monthly", "VAT, WHT, PAYE, CIT, TET"),
+    ("Tax compliance", "From \u20A6250k", "per month, VAT-exclusive"),
     ("Go-live", "8 weeks", "First close, 5 working days"),
 ]):
     cell = t.cell(0, i)
@@ -1088,7 +1100,19 @@ data_table(doc,
 
 spacer(doc, 8)
 
-h2(doc, "What we need from you", space_before=2)
+h2(doc, "Assumptions behind the fees", space_before=0)
+bullet(doc, "eight weeks assumes access to the four bank accounts and the client register within five working "
+            "days of kick-off.", bold_lead="Timeline: ")
+bullet(doc, "one company, one currency, nine estates. A second entity or a new estate is scoped separately.",
+       bold_lead="Scope: ")
+bullet(doc, "Zoho Books Nigeria edition, subscription paid by Baay directly to Zoho.",
+       bold_lead="Platform: ")
+bullet(doc, "all fees hold for 90 days from signature and are reviewed annually against transaction volume.",
+       bold_lead="Fee validity: ")
+
+spacer(doc, 8)
+
+h2(doc, "What we need from you", space_before=0)
 bullet(doc, "read-only access to the four bank accounts, and statements from January 2026 to date.",
        bold_lead="Bank access: ")
 bullet(doc, "a named finance lead, two days a week for eight weeks, with authority to approve the chart of "
@@ -1153,10 +1177,22 @@ _ORDER = {
 _W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
 
+def _dedupe(el):
+    """Drop duplicate singleton children (e.g. two tblLayout elements)."""
+    seen = set()
+    for child in list(el):
+        tag = child.tag
+        if tag in seen:
+            el.remove(child)
+        else:
+            seen.add(tag)
+
+
 def normalize_order(document):
     for local, order in _ORDER.items():
         rank = {n: i for i, n in enumerate(order)}
         for el in document.element.body.iter(_W + local):
+            _dedupe(el)
             children = list(el)
             children.sort(key=lambda c: rank.get(c.tag.replace(_W, ""), len(order)))
             for c in children:
@@ -1169,6 +1205,7 @@ def normalize_order(document):
             for local, order in _ORDER.items():
                 rank = {n: i for i, n in enumerate(order)}
                 for el in part._element.iter(_W + local):
+                    _dedupe(el)
                     children = list(el)
                     children.sort(key=lambda c: rank.get(c.tag.replace(_W, ""), len(order)))
                     for c in children:
