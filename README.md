@@ -18,3 +18,8 @@ Engagement proposal to set up Zoho Books. Professional fees are ₦1,800,000, ex
 
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Engagement_Proposal.docx`
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Engagement_Proposal.pdf`
+
+Chart of accounts for upload into Zoho Books. Existing sample accounts are coded and marked in red in the workbook. The CSV is the upload file.
+
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Chart_of_Accounts.xlsx`
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Chart_of_Accounts.csv`
