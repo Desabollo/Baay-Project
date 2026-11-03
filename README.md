@@ -23,3 +23,8 @@ Chart of accounts for upload into Zoho Books. Existing sample accounts are coded
 
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Chart_of_Accounts.xlsx`
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Chart_of_Accounts.csv`
+
+Posting guide for the accountant. Daily receipts, recognition, and the month-end close, with the chart codes and Zoho Books help screens.
+
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Posting_Guide.docx`
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Posting_Guide.pdf`
