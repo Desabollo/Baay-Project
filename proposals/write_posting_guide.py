@@ -570,7 +570,7 @@ class WordGuide:
         cap.paragraph_format.space_after = Pt(8)
         add_rich(
             cap,
-            f"Figure {self.fig}.  {caption}  Zoho Books help. Names, dates and currency in the picture are Zoho’s sample, not Baay’s.",
+            f"Figure {self.fig}.  {caption}  Zoho Books screen. Names, dates and currency in the picture are Zoho’s sample, not Baay’s.",
             size=8, italic=True, color=MUTED,
         )
 
@@ -618,7 +618,7 @@ class PdfImage(Flowable):
     def _wrap_caption(self, width):
         text = (
             f"Figure {self.number}.  {self.caption}  "
-            "Zoho Books help. Sample data, not Baay."
+            "Zoho Books screen. Sample data, not Baay."
         )
         words = text.split()
         lines, cur = [], ""
@@ -1119,6 +1119,10 @@ def write(doc):
         ],
         [0.38, 0.62],
     )
+    doc.figure(
+        "project-new.png",
+        "The new-project screen. The name is the estate, not a subscriber. Currency is naira. Do not copy the sample billing method: recurring billing is not how a plot is sold. If Customer Name will not save blank, stop. Do not attach the whole estate to the first subscriber.",
+    )
     doc.p("If a new phase opens after go-live, add a project with the same naming. Do not open an account called “Green City Phase 4”. Do not post that phase to a neighbouring project “for now”. A receipt in the wrong project is as hard to unwind as a receipt in the wrong account.")
 
     # 4
@@ -1201,6 +1205,10 @@ def write(doc):
         "1",
         "Open the retainer from the project",
         "Go to **Time Tracking > Projects**, open **Green City — Lantaba**, then **New Transaction > Create Retainer Invoice**. Starting from the project puts the estate on the document. The other path is **Sales > Retainer Invoices > + New**, and you must then choose the project yourself. Do not save a retainer with no project.",
+    )
+    doc.figure(
+        "project-menu.png",
+        "New Transaction, on the project. Zoho’s article has drawn a box around Create Manual Journal. Ignore the box. For a receipt, choose Create Retainer Invoice. Create Invoice is the allocation or the handover. Create Manual Journal is the cost, later. Do not use Log Time.",
     )
     doc.figure(
         "retainer-new.png",
@@ -1314,7 +1322,7 @@ def write(doc):
         "bank-statements.png",
         "Documents > Bank Statements. Use this only when the feed is not there. Add the file to the bank, then Match or categorise each line under the rules in this guide. Auto-forward is optional. It does not decide the account.",
     )
-    doc.p("The button on the bank screen itself is **Import Statement**, top right of Figure 4. Either path is fine. A missing feed is not a missing rule.")
+    doc.p("The button on the bank screen itself is **Import Statement**, top right of the Match screen. Either path is fine. A missing feed is not a missing rule.")
 
     # 10
     doc.h1("10.  When land is allocated")
@@ -1324,6 +1332,14 @@ def write(doc):
         "1",
         "Raise the invoice for the contract, not for the cash",
         "Go to **Sales > Invoices > + New**. Customer: the subscriber. Project: Green City — Lantaba. Date: the allocation date, not the original receipt date. Item: **Land plot**. Confirm the account on the line is **4020**, not Sales. Amount: 3,000,000. Tax: none. Reference: the plot number. Attach the allocation letter. Save and Send, or mark it Open. **A draft invoice does not recognise revenue.**",
+    )
+    doc.figure(
+        "invoice-new.png",
+        "The top of a new invoice. Customer is the subscriber. Invoice date is the allocation date, or the handover date, not the bank date. Ignore the sample tax, the currency and the address. In Baay the tax is none.",
+    )
+    doc.figure(
+        "invoice-lines.png",
+        "The lines. Choose the item, then look at Tax before you save. It must be none. The sample shows a sales tax and a PayPal option. Ignore both. Do not leave a tax on a land plot or a housing unit. Save and Send recognises the sale. Save as Draft does not.",
     )
     doc.p("Zoho will debit **Accounts Receivable (1100)**. You cannot point the invoice at 1120. Do not fight the screen, and do not raise a journal instead of an invoice to get the presentation account. The customer statement has to show the plot. 1120 is used at the statement date, in section 16, not on a Friday afternoon.")
     doc.journal(
@@ -1337,6 +1353,10 @@ def write(doc):
         "2",
         "Apply the retainer. Do not ask the subscriber to pay twice.",
         "On the invoice, where it shows **Retainers Available**, choose **Apply Now**. The other path is to open the retainer and **Apply to Invoice**, or **More > Use Retainers**. Apply 1,500,000. Not more than the unused retainer. Not more than the invoice. The project on the application is the same project.",
+    )
+    doc.figure(
+        "apply-retainer.png",
+        "Apply the retainer to the invoice. Type only the unused amount for this plot, and not more than the invoice balance. Baay retainers have no tax, so the sample note about reversing tax does not apply. Then Apply Retainers. Do not leave the deposit in 2020 after the sale.",
     )
     doc.journal(
         [
@@ -1613,21 +1633,26 @@ def write(doc):
     doc.p("This is a posting guide. It is not a tax ruling, and it is not a reload of the years already closed. Residential land and housing are not charged VAT, which is the treatment the Company already uses. Where a supply might be taxable, ask before you select a code.")
 
     doc.h1("Where the screens come from")
-    doc.p("Every screenshot in this note is a Zoho Books help screen, included so the accountant can see the button without leaving the note. The organisation names, currencies and amounts in those pictures are Zoho’s sample data.")
+    doc.p("Every screenshot in this note is a Zoho Books screen, included so the accountant can see the button without leaving the note. The organisation names, currencies and amounts in those pictures are Zoho’s sample data. Follow the caption, not the sample.")
     doc.table(
-        ["Figure", "What it shows", "Zoho help"],
+        ["Figure", "What it shows", "Where Zoho shows it"],
         [
-            ["1", "New retainer invoice", "Retainer invoices"],
-            ["2", "Record Payment on a retainer", "Retainer invoices"],
-            ["3", "Match on the bank feed", "Matching transactions"],
-            ["4", "Categorize, and the Other Income suggestion", "Matching transactions"],
-            ["5", "Bank statements inbox, if the feed is not there", "Documents"],
-            ["6", "A published manual journal", "Manual journals"],
-            ["7", "The Account column on a vendor bill", "Bills"],
-            ["8", "New credit note", "Credit notes"],
-            ["9", "Transaction locking, by module", "Transaction locking"],
-            ["10", "The lock date and the reason", "Transaction locking"],
-            ["11", "Payments Received, filtered to retainer payments", "Payments received"],
+            ["1", "New project", "Projects"],
+            ["2", "New Transaction on a project", "Projects"],
+            ["3", "New retainer invoice", "Retainer invoices"],
+            ["4", "Record Payment on a retainer", "Retainer invoices"],
+            ["5", "Match on the bank feed", "Matching transactions"],
+            ["6", "Categorize, and the Other Income suggestion", "Matching transactions"],
+            ["7", "Bank statements inbox, if the feed is not there", "Documents"],
+            ["8", "New invoice, the header", "Invoices"],
+            ["9", "Invoice lines, and the tax column", "Invoices"],
+            ["10", "Apply a retainer to an invoice", "Retainer invoices"],
+            ["11", "A published manual journal", "Manual journals"],
+            ["12", "The Account column on a vendor bill", "Bills"],
+            ["13", "New credit note", "Credit notes"],
+            ["14", "Transaction locking, by module", "Transaction locking"],
+            ["15", "The lock date and the reason", "Transaction locking"],
+            ["16", "Payments Received, filtered to retainer payments", "Payments received"],
         ],
         [0.12, 0.46, 0.42],
     )
@@ -1636,10 +1661,12 @@ def write(doc):
 
 def main():
     missing = [name for name in (
-        "retainer-new.png", "retainer-payment.png", "bank-match.png",
-        "bank-categorize.png", "bank-statements.png", "journal.png",
-        "bill-account.png", "credit-note.png", "lock-list.png",
-        "lock-date.png", "collections-report.png",
+        "project-new.png", "project-menu.png", "retainer-new.png",
+        "retainer-payment.png", "bank-match.png", "bank-categorize.png",
+        "bank-statements.png", "invoice-new.png", "invoice-lines.png",
+        "apply-retainer.png", "journal.png", "bill-account.png",
+        "credit-note.png", "lock-list.png", "lock-date.png",
+        "collections-report.png",
     ) if not (SCREENS / name).exists()]
     if missing:
         raise SystemExit(f"Missing screenshots: {missing}")
