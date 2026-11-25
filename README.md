@@ -33,3 +33,8 @@ Posting guide for the accountant, the finance manager, sales and client relation
 
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Posting_Guide.docx`
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Posting_Guide.pdf`
+
+Training guide for the consultant. One sitting each for sales, client relations, finance and accounts, and the Head of Accounts, with the screen for the step that sitting is allowed to click.
+
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Training_Guide.docx`
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Training_Guide.pdf`
