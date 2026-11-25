@@ -19,12 +19,17 @@ Engagement proposal to set up Zoho Books. Professional fees are ₦1,800,000, ex
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Engagement_Proposal.docx`
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Engagement_Proposal.pdf`
 
-Chart of accounts for upload into Zoho Books. Existing sample accounts are coded and marked in red in the workbook. The CSV is the upload file.
+Chart of accounts for upload into Zoho Books. Existing sample accounts are coded and marked in red in the workbook. The CSV is the upload file. This edition adds the lines the November 2026 registers require: the co-ownership return, the default charge, the development levy, the documentation fee, the corner piece, and the site lodge.
 
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Chart_of_Accounts.xlsx`
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Chart_of_Accounts.csv`
 
-Posting guide for the accountant. Daily receipts, recognition, and the month-end close, with the chart codes and Zoho Books help screens.
+Setup guide for the consultant. Every configuration, in order, before the first live receipt.
+
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Setup_Guide.docx`
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Setup_Guide.pdf`
+
+Posting guide for the accountant, the finance manager, sales and client relations. Receipts, recognition, co-ownership, bills and the month-end close, with the updated chart codes and Zoho Books screens.
 
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Posting_Guide.docx`
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Posting_Guide.pdf`

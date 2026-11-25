@@ -5,6 +5,11 @@ BAAY_PROJECTS_LIMITED_Master_Workbook_2023_2025_updated.xlsx on the
 Accounting & Tax branch: banks apart, receivables and revenue by stream,
 inventory in three buckets, tax by levy, and expenses by nature.
 
+The November 2026 papers in the BAAY Documents folder added the lines this
+version carries beyond that chart: co-ownership return, default charges,
+development levy, a separate documentation fee, the site-lodge cost, and the
+estates and product types those papers actually name.
+
 Accounts already in the Zoho sample are coded and written in red in the
 workbook. A CSV cannot carry colour, so the upload file is the same chart
 without the review columns. Parents are listed before their children, and a
@@ -260,14 +265,17 @@ ROWS = [
      "Header only. Liabilities that are not trade payables and not tax.",
      "Do not post to the header."),
     ("2025", "Co-ownership liabilities", "Other Current Liability", "Customer and other liabilities", "",
-     "Investment receipts that are not a sale of land or housing, less returns paid. Added because those receipts are in the sales records and must not become revenue.",
-     "Never credit 4010, 4020 or 4025 from this account."),
+     "Principal received under a co-ownership contract, less principal repaid. The contract says the company may use the funds to develop the named project, and must return the principal plus the return at the end of the period. It is not a sale of land or housing.",
+     "Never credit 4010, 4020, 4025 or 4040 from this account. A rollover stays here. It is not a new receipt and it is not revenue."),
     ("2045", "Receipts not yet identified", "Other Current Liability", "Customer and other liabilities", "",
      "A receipt whose nature is not yet known. It waits here, outside profit.",
      "Do not credit income so that a month will balance."),
     ("2055", "Amounts due on the company's other accounts", "Other Current Liability", "Customer and other liabilities", "",
      "Net amount due on accounts of the company other than the four bank balances in cash.",
      "Do not treat a transfer between the company's own banks as this account."),
+    ("2060", "Co-ownership return payable", "Other Current Liability", "Customer and other liabilities", "",
+     "Return that has accrued on co-ownership principal and has not yet been paid. The contract calls this the return on co-ownership. It is a cost of the funds, not a reduction of the principal in 2025.",
+     "Do not credit this from a receipt. Do not take the return to revenue. A cheque that has been issued but has not cleared has not settled this account."),
 
     ("2100", "Current tax liabilities", "Other Current Liability", "", "",
      "Header only. The charge for each year, less tax payments identified. Not an agreed assessment.",
@@ -337,7 +345,7 @@ ROWS = [
      "Do not use it to force a month to balance."),
 
     ("4000", "Revenue from contracts with customers", "Income", "", "",
-     "Header only. Estates are Zoho projects, not further accounts: Green City Lantaba, Idobi and Omu-Epe, Green City Ibadan, Heritage Garden, Agbowa, Green Hillside, Pacific Court, Pacific Apartment, Gorge View Court and Baay Foreshore.",
+     "Header only. Estates are Zoho projects, not further accounts. The registers name Green City Phase 1 (Ketu-Epe), Phase 2 (Ketu-Epe), Phase 3 (Omu-Epe), Phase 3 Extension (Omu-Epe), Green City Ibadan (Akinyele-Moniya), Heritage Garden, Green Hillside, Pacific Apartment, Pacific Apartment B, Eden Residence, GVC Gbagada, Baay Foreshore, Baay Foreshore Ibadan, Ologolo Land, 12 Basket, Scrapays and Engagement Service. Agbowa, Pacific Court and Gorge View Court remain from the earlier list. A new phase is a new project.",
      "Do not post to the header. A receipt is not revenue."),
     ("4010", "Revenue - civil engineering and construction", "Income", "Revenue from contracts with customers", "4010",
      "Construction and engineering revenue when the related performance is complete. Workbook 4010.",
@@ -352,8 +360,17 @@ ROWS = [
      "Project management and engineering consulting. Workbook 4030.",
      "Do not bury a plot sale in this account."),
     ("4040", "Revenue - ancillary charges", "Income", "Revenue from contracts with customers", "",
-     "Corner piece, documentation and development charges. They are income of their own, not a silent addition to the plot price.",
-     "Do not net them against cost of sales."),
+     "Header for charges that sit beside the plot or the house and are income of their own. Post the named charge to 4042, 4044 or 4046. Use 4040 only for a charge that is none of those three.",
+     "Do not net a charge against cost of sales, and do not bury it in the plot price."),
+    ("4042", "Revenue - development levy", "Income", "Revenue - ancillary charges", "",
+     "Development levy charged to a subscriber and collected for the company. The client register records it as its own column, separate from the purchase price.",
+     "A development fee paid to a government or an estate authority is not this account. That payment is inventory or a payable, depending on whether the unit has been sold."),
+    ("4044", "Revenue - documentation fee", "Income", "Revenue - ancillary charges", "",
+     "Documentation fee charged to a subscriber. The commission register deducts a documentation cost before it computes commission, so the fee has to be visible on its own.",
+     "The cost of printing the documents is 6097. Do not net that cost against this income."),
+    ("4046", "Revenue - corner piece", "Income", "Revenue - ancillary charges", "",
+     "Corner-piece premium. The registers record it as its own project line, and it is not part of the plot price.",
+     "Do not add it to 4020. The plot and the corner piece are two lines, even when they are paid together."),
     ("4099", "Sales", "Income", "", "",
      "Zoho sample income account. Do not use it for estate sales. Point items and journals at 4010 to 4040.",
      "Do not post a bank receipt here."),
@@ -367,8 +384,8 @@ ROWS = [
      "Zoho sample account for an adjustment line on an invoice.",
      "Do not use it as a general income account. Sundry receipts are 4150."),
     ("4120", "Late Fee Income", "Income", "", "",
-     "Zoho sample account for a late fee raised on an invoice.",
-     "A subscriber's next instalment is not a late fee."),
+     "Default charge. The receipt says a defaulted instalment carries a charge of 10 per cent of the amount defaulted. Zoho's late-fee account is the home for that charge, so the code sits on the sample account rather than on a second one.",
+     "A subscriber's next instalment is not a default charge. Do not raise the charge unless the instalment was actually missed. This is not a tax."),
 
     ("4100", "Other income", "Income", "", "",
      "Header only. Income that is not a sale of land, housing or construction.",
@@ -486,6 +503,9 @@ ROWS = [
     ("6098", "Meals and Entertainment", "Expense", "Administrative and operating expenses", "",
      "Meals and entertainment.",
      "Do not use this for a staff allowance that is remuneration."),
+    ("6065", "Site lodge and staff accommodation", "Expense", "Administrative and operating expenses", "",
+     "Rent and upkeep of a lodge used by the project team, such as the staff lodge at Pacific Apartment. It is not the cost of the building being sold.",
+     "A bed or fitting that will be used for more than a year is 1510. Accommodation that is part of a named staff member's pay is 6010."),
     ("6088", "Purchase Discounts", "Expense", "Administrative and operating expenses", "",
      "Discount a vendor gives on a purchase. Zoho's type for this sample account is Expense, so it cannot sit under Cost of sales.",
      "A discount given to a subscriber is the Discount account, not this one."),
@@ -497,8 +517,11 @@ ROWS = [
      "Header only.",
      "Do not post a bank charge here."),
     ("7010", "Finance costs - interest and similar charges", "Expense", "Finance costs", "7010",
-     "Interest and similar charges on borrowings. Workbook 7010.",
-     "COT and transfer charges are Bank Fees and Charges."),
+     "Interest and similar charges on a bank facility or a director's loan. Workbook 7010.",
+     "COT and transfer charges are Bank Fees and Charges. The return on co-ownership is 7020, not this line."),
+    ("7020", "Co-ownership return", "Expense", "Finance costs", "",
+     "Return accruing to co-owners. The contract pays principal plus the return at the end of the period, after sales of the property the funds were put into. Credit 2060 as it accrues. Debit 2060 when it is paid.",
+     "Do not debit 2025 for the return. Do not take it to revenue, and do not net it against a sale."),
 
     ("8000", "Income tax expense", "Expense", "", "",
      "Header only.",
@@ -809,7 +832,7 @@ def write_xlsx(rows):
         ("What this file is",
          "The import sheet, and the CSV of the same name, are the file to load into Zoho Books. The Review sheet is for the person posting. It is not imported. Colour cannot be stored in a CSV, which is why the red mark is in this workbook."),
         ("Where the detail comes from",
-         "The level of detail is the controlled chart in the master workbook for 2023 to 2025: one account for each bank, receivables and revenue split by stream, inventory in three buckets, tax split by levy, and expenses split by nature. Estates are not accounts. They are Zoho projects. A further account was added only where the sales register already separates the line, or where a balance cannot be posted without one: housing, ancillary charges, co-ownership, unidentified receipts and payments, related parties, and the unpaid amount on issued shares."),
+         "The level of detail is the controlled chart in the master workbook for 2023 to 2025: one account for each bank, receivables and revenue split by stream, inventory in three buckets, tax split by levy, and expenses split by nature. Estates are not accounts. They are Zoho projects. A further account was added only where a register already separates the line, or where a balance cannot be posted without one. The November 2026 papers added the co-ownership return, the 10 per cent default charge, the development levy, the documentation fee, the corner piece, and the site lodge. They also named Eden Residence, Baay Foreshore Ibadan, GVC Gbagada, Ologolo Land, 12 Basket, Scrapays and Engagement Service. Those are projects, not accounts."),
         ("How to import",
          "In Zoho Books go to Accountant, Chart of Accounts, and Import Chart of Accounts. Upload the CSV. Duplicate handling must be Overwrite, so the four-digit codes land on the accounts already in the organisation. Zoho matches those accounts on the name. Character encoding is UTF-8. Map Account Name, Account Code, Description, Account Type, Parent Account, Currency and Account Status. Do not map Account ID. The sample export's IDs were damaged by Excel and are not in this file. Do not import this instruction sheet."),
         ("Parents and children",
@@ -817,7 +840,7 @@ def write_xlsx(rows):
         ("Accounts Zoho will not re-parent",
          "Accounts Receivable, Accounts Payable, Retained Earnings, Opening Balance Offset, Unearned Revenue, VAT Payable, Undeposited Funds, Inventory Asset, Cost of Goods Sold, Sales, Discount, Shipping Charge, Other Charges, Late Fee Income, Opening Balance Adjustments, Dimension Adjustments and Exchange Gain or Loss are coded, and marked red, but they have no parent in the upload file. Zoho locks these, and a parent on the import is the usual reason a row fails. Their intended group is on the Review sheet. After the import, move one only if the edit screen allows it. Do not force it. Do not post estate transactions to Sales, Cost of Goods Sold or Inventory Asset."),
         ("How a naira is treated",
-         "A receipt from a subscriber is Unearned Revenue until the plot is allocated or the house is handed over. Co-ownership is a liability, never revenue. A movement between Providus, First Bank, Sterling and GTBank is a transfer. A receipt or payment whose nature is not known waits in 2045 or 1180. It is not posted to profit to close a month. Residential land and housing are not charged to VAT. Depreciation is 20 per cent a year, straight line, with a full year in the year of purchase."),
+         "A receipt from a subscriber is Unearned Revenue until the plot is allocated or the house is handed over. Co-ownership principal is a liability. The return on it accrues to 7020 and sits in 2060 until it is paid. A movement between Providus, First Bank, Sterling and GTBank is a transfer. A receipt or payment whose nature is not known waits in 2045 or 1180. It is not posted to profit to close a month. Residential land and housing are not charged to VAT. A missed instalment carries a default charge of 10 per cent, and that charge is Late Fee Income, not a tax. Depreciation is 20 per cent a year, straight line, with a full year in the year of purchase."),
         ("Opening balances",
          "Open from the signed statement of financial position at 31 December 2025. This chart does not contain those figures. Opening Balance Offset and Opening Balance Adjustments should both be nil when the opening trial balance ties."),
         ("Count",

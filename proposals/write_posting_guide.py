@@ -1,8 +1,13 @@
 """Baay Projects Limited — Zoho Books Premium posting guide.
 
 Word and PDF. Screenshots are Zoho's own help screens, embedded so the
-accountant is not sent to a marketing page. Sample names in those screens
-are Zoho's, not Baay's.
+reader is not sent to a marketing page. Sample names in those screens are
+Zoho's, not Baay's.
+
+The November 2026 registers added co-ownership returns, the default charge,
+the development levy, the documentation fee, the corner piece, branches,
+and the estates this edition names. Configuration itself is in the setup
+guide. This note is how a transaction is posted once that setup is done.
 """
 
 from __future__ import annotations
@@ -60,7 +65,7 @@ WHITE = "FFFFFF"
 ROW = "F7FAF9"
 GOLD = "8A6A2F"
 
-DATE = "3 November 2026"
+DATE = "25 November 2026"
 REF = "CEA/BPL/ZB/2026-01"
 ORG = "Baay Projects Limited"
 
@@ -373,7 +378,7 @@ class WordGuide:
             ("Date", DATE),
             ("Engagement", REF),
             ("Prepared by", "CloudERP Accounting, Lagos"),
-            ("Sits beside", "The Zoho Books chart of accounts, 130 accounts"),
+            ("Sits beside", "The Zoho Books chart of accounts, 136 accounts"),
         ]
         table = self.doc.add_table(rows=len(meta), cols=2)
         set_table_widths(table, [int(self.dxa * 0.28), int(self.dxa * 0.72)])
@@ -794,7 +799,7 @@ class PdfGuide:
             ("Date", DATE),
             ("Engagement", REF),
             ("Prepared by", "CloudERP Accounting, Lagos"),
-            ("Sits beside", "The Zoho Books chart of accounts, 130 accounts"),
+            ("Sits beside", "The Zoho Books chart of accounts, 136 accounts"),
         ]
         data = [
             [Paragraph(a, self.styles["meta_l"]), Paragraph(b, self.styles["meta_r"])]
@@ -1004,7 +1009,7 @@ CONTENTS = [
     ("11", "When a house is handed over"),
     ("12", "Ancillary charges, construction and other trading"),
     ("13", "Money going out"),
-    ("14", "A refund"),
+    ("14", "A refund, a rollover, and a default charge"),
     ("15", "Related parties, dividends and unpaid shares"),
     ("16", "Month-end journals"),
     ("17", "Reconcile, then lock"),
@@ -1024,14 +1029,14 @@ def write(doc):
     doc.p("A receipt is not a sale. If you remember one sentence from this guide, remember that.")
     doc.p("Land becomes revenue when control of an identified plot has transferred. That is the day the plot is allocated, or the day the register says Bought. Not before. And not above the balance on that subscriber’s contract. Money received above the contract stays a deposit, or it is refunded. It is not extra revenue.")
     doc.p("Housing becomes revenue only when handover is recorded. A house can be fully paid and still not be a sale. Until the handover note is in the file, the money sits in **Unearned Revenue (2020)**. The software will not do this quietly in the background. A status change is a prompt to Finance. Finance posts the recognition. Nobody else does.")
-    doc.p("Co-ownership is an investment receipt. It credits **Co-ownership liabilities (2025)**. It never credits sales, and it is not a retainer. A retainer is a subscriber deposit. Co-ownership is not a subscriber.")
+    doc.p("Co-ownership is not a sale. The contract takes a principal, lets the company use it on the named project, and returns the principal plus a return at the end of the period. Principal credits **Co-ownership liabilities (2025)**. The return accrues to **Co-ownership return (7020)** and sits in **Co-ownership return payable (2060)** until it is paid. Neither amount is revenue, and neither is a retainer. A retainer is a subscriber deposit. A co-owner is not a subscriber.")
     doc.p("A movement between Providus, First Bank, Sterling and GTBank is a transfer. It cancels. It is not income on the way in, and it is not an expense on the way out. If those two lines are posted as income and expense, profit is wrong in both directions and the cash still looks right. That is the error this step exists to stop.")
     doc.p("A line whose narration does not yet say what it was waits outside profit. A receipt waits in **Receipts not yet identified (2045)**. A payment waits in **Payments not yet identified (1180)**. Naming it is a weekly job, before the lock. Forcing it into income to make a month look tidy is not a close. It is a misstatement.")
     doc.note("Zoho will offer to help. On a bank deposit it may suggest Other Income, and mark the line Recognized. That is the word on the button. The suggestion is wrong for a Baay receipt. Do not accept it. Match a transaction you have already posted, or categorise to the holding account. Do not let the feed decide the sale.")
 
     # 2
     doc.h1("2.  The accounts you will touch")
-    doc.p("The chart has 130 accounts. You will not use most of them on a Monday. These are the ones a receipt, a sale, a cost and a close actually hit. Codes are the four-digit codes on the uploaded chart. If a code in this guide is not in Zoho, stop. Do not create a near-duplicate with a slightly different name. Import the chart first. Section 4 says how.")
+    doc.p("The chart has 136 accounts. You will not use most of them on a Monday. These are the ones a receipt, a sale, a cost and a close actually hit. Codes are the four-digit codes on the uploaded chart. If a code in this guide is not in Zoho, stop. Do not create a near-duplicate with a slightly different name. The consultant imports the chart. The setup guide says how. This note assumes that import has been signed off.")
     doc.table(
         ["Code", "Account", "What it is for"],
         [
@@ -1056,7 +1061,8 @@ def write(doc):
             ["1510–1530", "Equipment, vehicles, plant", "Capitalise. Do not expense the purchase."],
             ["1590", "Accumulated depreciation", "Credit balance. The expense is 6070."],
             ["2020", "Unearned Revenue", "Subscriber money received before allocation or handover. The retainer account."],
-            ["2025", "Co-ownership liabilities", "Investment receipts. Never revenue."],
+            ["2025", "Co-ownership liabilities", "Principal received, less principal repaid. Never revenue."],
+            ["2060", "Co-ownership return payable", "Return accrued and not yet paid. A cheque issued is not a payment until it clears."],
             ["2045", "Receipts not yet identified", "A receipt you cannot yet name. Outside profit."],
             ["2110–2140", "Tax payables, by levy", "Companies income tax, tertiary education tax, police trust fund, NASENI. Split the credit."],
             ["2150", "VAT Payable", "Only where a supply is actually taxable. Not residential land or housing."],
@@ -1067,15 +1073,20 @@ def write(doc):
             ["3030", "Dividends", "Debit in equity. Not an expense. Not director remuneration."],
             ["4020", "Revenue — land and property sales", "The plot, on allocation. Not on the receipt."],
             ["4025", "Revenue — housing", "The unit, on handover. Not on the transfer of money."],
-            ["4040", "Revenue — ancillary charges", "Corner piece, documentation, development charges. Their own income."],
+            ["4042", "Revenue — development levy", "The levy charged to the subscriber. Not a fee the company pays to an authority."],
+            ["4044", "Revenue — documentation fee", "The fee charged to the subscriber. Printing the documents is 6097."],
+            ["4046", "Revenue — corner piece", "The corner premium. Its own line, even when it is paid with the plot."],
+            ["4120", "Late Fee Income", "The 10 per cent default charge on a missed instalment. Not a tax, and not the next instalment."],
             ["4010", "Revenue — civil engineering and construction", "When that performance is complete. Not a plot."],
             ["5020", "Cost of sales — land released", "The plot cost, on the same day as 4020."],
             ["5025", "Cost of sales — housing released", "The unit cost, on the same day as 4025."],
-            ["6035", "Selling commissions", "Gross. Do not net a commission against revenue."],
+            ["6035", "Selling commissions", "Gross, including an upline share. Do not net it against revenue."],
+            ["6065", "Site lodge and staff accommodation", "The team's lodge. Not the cost of the house being sold."],
             ["6050", "Bank Fees and Charges", "Bank charges. Not finance costs, and not negative interest."],
             ["6070", "Depreciation Expense", "20 per cent, straight line, a full year in the year of purchase."],
             ["6080", "Bad Debt", "The impairment expense. Credit 1130."],
             ["6085", "Customer refunds", "Only where the receipt was already income and cannot be reversed against that sale."],
+            ["7020", "Co-ownership return", "The return accruing to co-owners. A finance cost. Not a reduction of 2025."],
             ["6015", "Director remuneration", "Directors. Not staff costs, not a dividend, not a loan."],
         ],
         [0.16, 0.40, 0.44],
@@ -1105,20 +1116,28 @@ def write(doc):
     doc.table(
         ["Project", "What it holds"],
         [
-            ["Green City — Lantaba", "Land, in phases. Allocation is the sale."],
-            ["Green City — Idobi", "Land. Own project, so a phase is not lost in Lantaba."],
-            ["Green City — Omu-Epe", "Land. Own project."],
-            ["Green City Ibadan", "Land at Akinyele-Moniya. Same rule."],
-            ["Heritage Garden", "Residential land. Kept separate from Green City."],
-            ["Agbowa", "Residential land. Own project."],
-            ["Green Hillside", "Own project. Do not fold it into Green City."],
-            ["Pacific Court", "Housing. The sale is the handover, not the transfer."],
-            ["Pacific Apartment", "Housing. Same rule."],
-            ["Gorge View Court, Gbagada", "Housing. Same rule. Receipts are large. That does not make them revenue."],
-            ["Baay Foreshore", "Waterfront land and housing. Own collections."],
+            ["Green City Phase 1 (Ketu-Epe)", "Land. The client register’s name. Allocation is the sale."],
+            ["Green City Phase 2 (Ketu-Epe)", "Land. Own project, so a phase is not lost in Phase 1."],
+            ["Green City Phase 3 (Omu-Epe)", "Land. Own project."],
+            ["Green City Phase 3 Extension (Omu-Epe)", "Land. Own project. Do not fold it into Phase 3."],
+            ["Green City Ibadan (Akinyele-Moniya)", "Land. Same rule."],
+            ["Heritage Garden", "Land, including Igbo du, Isiwo. Kept separate from Green City."],
+            ["Green Hillside", "Land. Own project. Do not fold it into Green City."],
+            ["Ologolo Land", "Land. Own project."],
+            ["Pacific Apartment", "Housing, including Block B. Handover is the sale."],
+            ["Pacific Apartment B", "Housing. Own project. Do not fold it into Pacific Apartment."],
+            ["Eden Residence", "Housing. The Eden register. Handover is the sale."],
+            ["GVC Gbagada", "Housing. Receipts are large. That does not make them revenue."],
+            ["Baay Foreshore", "Housing. The sample receipt is a bungalow here. Handover is the sale."],
+            ["Baay Foreshore Ibadan", "Housing, Ajoda New Town. Own project."],
+            ["12 Basket", "Construction. Revenue is 4010, when the work is certified."],
+            ["Scrapays", "Construction. Same rule. Do not post it as a plot."],
+            ["Engagement Service", "A service, not a plot and not a house. Account 4030."],
         ],
-        [0.38, 0.62],
+        [0.42, 0.58],
     )
+    doc.p("Agbowa, Pacific Court and Gorge View Court were on the earlier list and are not in the November registers. Leave the project in place if it already exists. Confirm with the Head of Accounts before you post a new receipt to it. Do not merge Gorge View Court into GVC Gbagada. They were named separately, and a merge would hide one of them.")
+    doc.p("A corner piece is not a project. It is a line, account 4046, on the estate’s project. Co-ownership is not a project either. The contract names the estate the funds go into, and the receipt takes that project plus account 2025.")
     doc.figure(
         "project-new.png",
         "The new-project screen. The name is the estate, not a subscriber. Currency is naira. Do not copy the sample billing method: recurring billing is not how a plot is sold. If Customer Name will not save blank, stop. Do not attach the whole estate to the first subscriber.",
@@ -1146,7 +1165,10 @@ def write(doc):
         [
             ["Land plot", "4020 Revenue — land and property sales", "None"],
             ["Housing unit", "4025 Revenue — housing", "None"],
-            ["Ancillary charge", "4040 Revenue — ancillary charges", "None, unless a specific charge has been confirmed as taxable"],
+            ["Development levy", "4042 Revenue — development levy", "None"],
+            ["Documentation fee", "4044 Revenue — documentation fee", "None"],
+            ["Corner piece", "4046 Revenue — corner piece", "None"],
+            ["Default charge", "4120 Late Fee Income", "None. Not a tax."],
             ["Construction", "4010 Revenue — civil engineering and construction", "Ask before you select a code"],
             ["Consulting", "4030 Revenue — project management and consulting", "Ask before you select a code"],
             ["Other trading", "4130 Other trading income", "Ask before you select a code"],
@@ -1156,10 +1178,10 @@ def write(doc):
     doc.warn("Do not use Zoho’s sample item if its account is Sales (4099). Do not put VAT on a land plot or a housing unit.")
     doc.h2("Customers, and the four banks")
     doc.p("Customers come from the client register, not from the spelling on a bank narration. Search before you add. A second customer for the same subscriber, because the bank wrote the name differently, splits the deposit and the later invoice. If the narration does not match a customer, the receipt waits in 2045 until Client Relations names the person. Do not invent a customer called Transfer, or Cash deposit, or the first word of the narration.")
-    doc.p("On the customer, keep the status the register already uses: **Paying, Bought, Paid, Handed over, Refund**. Put the plot or unit number in the notes. The status is what tells Finance whether to recognise. Client Relations changes the status. Finance posts.")
+    doc.p("On the customer, keep the status the client register already uses: **Prospect, Paying, Completed, Refund, Void, Incentive**. Put the plot or unit number in the notes. Completed is not, by itself, a sale. Finance recognises land on allocation and housing on handover. Client Relations sets the status. Finance posts.")
     doc.p("The four bank accounts are 1010 Providus, 1020 First Bank, 1030 Sterling and 1040 GTBank. Opening balances agree to the signed statement of financial position at 31 December 2025, including cash of **₦155,904,157.58** across the banks. Do not re-key the old bank lines. There are some twenty-three thousand of them. This guide starts from that opening. It is not a history load.")
     doc.h2("Who may touch what")
-    doc.p("Set the roles before go-live, not after the first argument. Section 21 is the card. The short version: Client Relations can open a subscriber, raise a retainer and change a status. They cannot change the chart, publish a journal, categorise a bank line to income, or unlock a month. Finance posts, matches, recognises and locks. The Managing Director sees the five screens in section 18 and approves. The company secretary can read.")
+    doc.p("Set the roles before go-live, not after the first argument. Section 21 is the card. The short version: Client Relations can open a subscriber, raise a retainer and set a status. They cannot change the chart, publish a journal, categorise a bank line to income, or unlock a month. Finance posts, matches, recognises and locks. The Head of Accounts sees the five screens in section 18 and approves. Sales can see their own project. They cannot take a payment.")
 
     # 5
     doc.h1("5.  Every receipt, the same day")
@@ -1172,7 +1194,7 @@ def write(doc):
             ["Plot allocated, or the register says Bought.", "Invoice, item Land plot, account 4020, dated the allocation. Apply the retainer. Journal the cost, Dr 5020 Cr 1210.", "Yes — the contract, not the cash"],
             ["House handed over.", "Invoice, item Housing unit, account 4025, dated the handover. Apply the retainer. Journal the cost, Dr 5025 Cr 1230.", "Yes — the contract, not the cash"],
             ["House fully paid, handover not yet recorded.", "Leave it in 2020. Paid is not handed over.", "No"],
-            ["Corner piece, documentation or development charge earned.", "Invoice line, account 4040, on the day it is earned. Not buried in the plot price.", "Yes — that charge only"],
+            ["Development levy, documentation fee or corner piece earned.", "Its own invoice line: 4042, 4044 or 4046. Not buried in the plot price.", "Yes — that charge only"],
             ["Co-ownership receipt.", "Categorise or journal to 2025. Not a retainer. Not a customer payment.", "No"],
             ["Money moved from one Baay bank to another.", "Transfer. Match both statement lines to it.", "No"],
             ["Receipt you cannot name.", "Categorise to 2045. Same day.", "No"],
@@ -1200,11 +1222,11 @@ def write(doc):
     # 6
     doc.h1("6.  A subscriber instalment")
     doc.p("This is the Monday transaction. The figures are an example, so you can see the journals balance. Use the register for the real amount, the real subscriber and the real plot. Do not post these figures.")
-    doc.p("**Example.** Providus receives ₦1,500,000. The narration is a Green City subscriber at Lantaba. The plot is still Paying. No withholding tax was deducted. No VAT.")
+    doc.p("**Example.** Providus receives ₦1,500,000. The narration is a Green City subscriber, Phase 1 at Ketu-Epe. The plot is still Paying. No withholding tax was deducted. No VAT.")
     doc.step(
         "1",
         "Open the retainer from the project",
-        "Go to **Time Tracking > Projects**, open **Green City — Lantaba**, then **New Transaction > Create Retainer Invoice**. Starting from the project puts the estate on the document. The other path is **Sales > Retainer Invoices > + New**, and you must then choose the project yourself. Do not save a retainer with no project.",
+        "Go to **Time Tracking > Projects**, open the estate — in this example **Green City Phase 1 (Ketu-Epe)** — then **New Transaction > Create Retainer Invoice**. Starting from the project puts the estate on the document. The other path is **Sales > Retainer Invoices > + New**, and you must then choose the project yourself. Do not save a retainer with no project.",
     )
     doc.figure(
         "project-menu.png",
@@ -1218,7 +1240,7 @@ def write(doc):
     doc.bullets([
         "**Customer.** The subscriber, already on the register. Search. Do not add a duplicate.",
         "**Retainer invoice date.** The bank date.",
-        "**Project.** Green City — Lantaba. If you started from the project, this is already filled. Check it.",
+        "**Project.** Green City Phase 1 (Ketu-Epe). If you started from the project, this is already filled. Check it.",
         "**Reference.** The plot number.",
         "**Description.** Instalment — plot still Paying. Name the plot. A description that says only “payment” cannot be reviewed.",
         "**Amount.** 1,500,000. The gross instalment, even if you will deal with withholding tax in a moment.",
@@ -1271,18 +1293,41 @@ def write(doc):
 
     # 7
     doc.h1("7.  Co-ownership")
-    doc.p("Co-ownership is money received from an investor in a scheme. It is not a sale of land or housing, and it is not a subscriber deposit. At 31 December 2025 the Company held co-ownership liabilities of its own. New receipts join that liability. They do not join revenue.")
-    doc.warn("Do not raise a retainer for co-ownership. A retainer credits 2020 and will be applied to a sale later by someone who thinks it is a subscriber. Do not record a customer payment. That creates unused credits in receivables.")
-    doc.p("On the bank line, **Categorize**. The account is **Co-ownership liabilities (2025)**. The contact is the investor, as a customer or as the name you can reconcile, not as a new subscriber with a plot. The project is the estate, if the panel allows a project. The notes say co-ownership, not a sale. The date is the bank date.")
+    doc.p("The co-ownership contract is a different promise from a plot. The co-owner pays a principal. The company may use it to develop the project named on the certificate. At the end of the period the company pays back the principal and a return. The contract calls that return the return on co-ownership. It is calculated on the certificate, for the period on the certificate. It is not interest you may invent, and it is not a share of profit you may estimate.")
+    doc.p("Read the status on the investment record before you post. Paid means the source says it was paid, and the payout date should be filled and supported. Issued Check means a cheque has been written. It does not mean the co-owner has the money. Not Yet Matured means it is still running, unless the maturity date has already passed, in which case someone confirms it before you accrue a further return. Rollover means the principal stays. It is not a new receipt. Void is excluded. Keep the record. Do not post it.")
+    doc.warn("Do not raise a retainer for co-ownership. A retainer credits 2020 and will be applied to a sale later by someone who thinks it is a subscriber. Do not record a customer payment. That creates unused credits in receivables. Do not credit 4020, 4025 or 4046.")
+    doc.h2("The principal comes in")
+    doc.p("On the bank line, **Categorize**. The account is **Co-ownership liabilities (2025)**. The contact is the co-owner, not a new subscriber with a plot. The project is the estate named on the certificate. The notes say co-ownership, the period, and the certificate reference. The date is the bank date.")
     doc.p("If the categorise panel will not take 2025 cleanly, do not force it into income. Publish a journal instead, and then match the bank line to that journal.")
     doc.journal(
         [
             ("1040", "Guaranty Trust Bank", 10_000_000, 0),
             ("2025", "Co-ownership liabilities", 0, 10_000_000),
         ],
-        "Example. ₦10,000,000 received into GTBank. Not revenue.",
+        "Example. ₦10,000,000 received into GTBank. Not revenue. Use the certificate, not this figure.",
     )
-    doc.p("A return of co-ownership money is the reverse: debit 2025, credit the bank that pays it. It is not a dividend, not director remuneration, and not 6085. Match the withdrawal to that payment. Do not categorise it as a vendor bill unless there is a vendor and a bill.")
+    doc.h2("The return accrues")
+    doc.p("Accrue the return as the period runs, monthly if you close monthly. Debit **7020 Co-ownership return**. Credit **2060 Co-ownership return payable**. The amount is the certificate’s return for that month, not a flat rate from this guide. The rates on the file differ by co-owner and by period. Do not apply one rate to every contract.")
+    doc.journal(
+        [
+            ("7020", "Co-ownership return", 200_000, 0),
+            ("2060", "Co-ownership return payable", 0, 200_000),
+        ],
+        "Example only. The shape of a month’s accrual. The figure comes from the certificate.",
+    )
+    doc.p("Do not debit 2025 for the return. Principal and return are different promises, and the investment record tracks them separately. Do not take the accrual to 4020. The contract says the return is generated after sales of the property. That sentence does not make the receipt a sale, and it does not make the return a reduction of revenue.")
+    doc.h2("The payout")
+    doc.p("When the money leaves the bank, and not before, pay both parts. An issued cheque stays in 2025 and 2060 until it clears. Match the withdrawal to the payment. Do not categorise it as a vendor bill unless there is a vendor and a bill.")
+    doc.journal(
+        [
+            ("2025", "Co-ownership liabilities", 10_000_000, 0),
+            ("2060", "Co-ownership return payable", 2_000_000, 0),
+            ("1040", "Guaranty Trust Bank", 0, 12_000_000),
+        ],
+        "Example. Principal and return paid together. Two debits, one bank line. Not a dividend, not 6015, and not 6085.",
+    )
+    doc.h2("A rollover")
+    doc.p("A rollover keeps the principal in 2025. There is no bank line, and there must be no income. If the return is rolled into a new principal, debit 2060 and credit 2025 for that return, and write the new period and the new certificate reference in the notes. If the record says Rollover but the new amount, the new period and the new maturity are blank, do not invent them. Leave the old principal where it is and send the row back to the person who keeps the investment record.")
 
     # 8
     doc.h1("8.  A transfer between the Company’s banks")
@@ -1327,11 +1372,11 @@ def write(doc):
     # 10
     doc.h1("10.  When land is allocated")
     doc.p("The register changes from Paying to Bought, or Client Relations records the allocation and puts the allocation letter on the customer. That is the sale. The cash date is not. A plot allocated this Friday, paid for in March, is revenue on Friday.")
-    doc.p("**Example, continued from section 6.** The Lantaba plot is allocated on Friday. Contract price ₦3,000,000. Retainer already held ₦1,500,000. Cost of the plot, already in land inventory, ₦900,000. These figures are an example.")
+    doc.p("**Example, continued from section 6.** The Phase 1 plot is allocated on Friday. Contract price ₦3,000,000. Retainer already held ₦1,500,000. Cost of the plot, already in land inventory, ₦900,000. These figures are an example.")
     doc.step(
         "1",
         "Raise the invoice for the contract, not for the cash",
-        "Go to **Sales > Invoices > + New**. Customer: the subscriber. Project: Green City — Lantaba. Date: the allocation date, not the original receipt date. Item: **Land plot**. Confirm the account on the line is **4020**, not Sales. Amount: 3,000,000. Tax: none. Reference: the plot number. Attach the allocation letter. Save and Send, or mark it Open. **A draft invoice does not recognise revenue.**",
+        "Go to **Sales > Invoices > + New**. Customer: the subscriber. Project: Green City Phase 1 (Ketu-Epe). Date: the allocation date, not the original receipt date. Item: **Land plot**. Confirm the account on the line is **4020**, not Sales. Amount: 3,000,000. Tax: none. Reference: the plot number. Attach the allocation letter. Save and Send, or mark it Open. **A draft invoice does not recognise revenue.**",
     )
     doc.figure(
         "invoice-new.png",
@@ -1369,7 +1414,7 @@ def write(doc):
     doc.step(
         "3",
         "Release the cost the same day",
-        "Go to **Accountant > Manual Journals > + New Journal**. Date: the allocation date. Journal number: let Zoho number it, and put the plot number in the reference. Notes, in this form every time: Land allocation | Green City — Lantaba | plot number | subscriber | cost from the plot register. Reporting method: **Accrual and Cash**. Currency: NGN. Contact: the subscriber, on the lines, if the line allows a contact.",
+        "Go to **Accountant > Manual Journals > + New Journal**. Date: the allocation date. Journal number: let Zoho number it, and put the plot number in the reference. Notes, in this form every time: Land allocation | Green City Phase 1 (Ketu-Epe) | plot number | subscriber | cost from the plot register. Reporting method: **Accrual and Cash**. Currency: NGN. Contact: the subscriber, on the lines, if the line allows a contact.",
     )
     doc.journal(
         [
@@ -1388,11 +1433,11 @@ def write(doc):
     # 11
     doc.h1("11.  When a house is handed over")
     doc.p("The shape is the same as land. The trigger is different. Housing revenue is the handover, not the transfer of money, and not the word Paid on the register. A unit can be fully paid for months and still sit in 2020. That is correct. Do not “catch it up” because the cash arrived last quarter.")
-    doc.p("**Separate example.** A unit at Gorge View Court is handed over. Contract ₦45,000,000. Retainers already held ₦30,000,000. Cost sitting in completed units, ₦18,000,000. These figures are an example, not a unit on the register.")
+    doc.p("**Separate example.** A unit at GVC Gbagada is handed over. Contract ₦45,000,000. Retainers already held ₦30,000,000. Cost sitting in completed units, ₦18,000,000. These figures are an example, not a unit on the register.")
     doc.bullets([
-        "Invoice, dated the handover. Item **Housing unit**. Account **4025**. Tax none. Amount 45,000,000, the contract. Project: Gorge View Court, Gbagada. Attach the handover note.",
+        "Invoice, dated the handover. Item **Housing unit**. Account **4025**. Tax none. Amount 45,000,000, the contract. Project: GVC Gbagada. Attach the handover note.",
         "Apply retainers of 30,000,000. Receivable left: 15,000,000, which must equal the register.",
-        "Same day, publish the cost journal: debit **5025**, credit **1230**, 18,000,000. Notes: Housing handover | Gorge View Court | unit number | subscriber | cost from the unit register.",
+        "Same day, publish the cost journal: debit **5025**, credit **1230**, 18,000,000. Notes: Housing handover | GVC Gbagada | unit number | subscriber | cost from the unit register.",
     ])
     doc.journal(
         [
@@ -1406,14 +1451,24 @@ def write(doc):
         "Three documents, one handover. The invoice, the application of the retainer, and the cost. Shown together so you can see they balance as a set.",
     )
     doc.p("While the house is being built, cost sits in **1220 Construction work in progress**. A payment to a subcontractor for that house is a bill or a categorised withdrawal to 1220, not to 5010 and not to an overhead. When the unit is complete and held, move it from 1220 to **1230**. Release it to 5025 only on handover. A receipt does not move 1220. A bank rule must not be allowed to credit 4025.")
-    doc.warn("Do not let Zoho’s suggestion, or a bank rule, recognise housing because the amount is large. Gorge View receipts are large. Size is not a handover.")
+    doc.warn("Do not let Zoho’s suggestion, or a bank rule, recognise housing because the amount is large. GVC Gbagada receipts are large. Size is not a handover.")
 
     # 12
     doc.h1("12.  Ancillary charges, construction and other trading")
-    doc.p("Corner piece, documentation and development charges are real money, and they are easy to bury inside a plot price. They are item **Ancillary charge**, account **4040**, on the day the charge is earned. They are not a silent addition to 4020, and they are not netted against cost of sales. If the charge is invoiced with the plot, it is its own line on that invoice, with its own account. Look at the line before you save. Zoho will use the item’s account. If someone has changed the item, the line will be wrong and the total will still look right.")
-    doc.p("Construction and engineering revenue is **4010**, and only when the related performance is complete. The cost, released on that day, is **5010** for materials and subcontracts or **5030** for site labour and equipment hire. Do not put a plot sale in 4010 because the subscriber is a contractor. Do not put a construction invoice in 4020 because it feels like property.")
-    doc.p("Project management and consulting is **4030**. Other trading is **4130**, and its cost is **5040**. A trade must not look like a plot. If you cannot tell, from the invoice, whether you sold a plot or a load of materials, the item is wrong.")
-    doc.p("Interest earned on a bank balance is **4110 Interest Income**. A bank charge is not negative interest. It is 6050. Interest on a facility is **7010**, and it is not a bank charge either.")
+    doc.p("The registers keep three charges beside the plot price. Each one is its own line on the allocation invoice, with its own account. Look at the line before you save. Zoho will use the item’s account. If someone has changed the item, the line will be wrong and the total will still look right.")
+    doc.table(
+        ["Charge", "Account", "When it is earned", "What it is not"],
+        [
+            ["Development levy", "4042", "On allocation, if the client register shows a levy", "A fee the company pays to an authority. That payment is inventory or a bill."],
+            ["Documentation fee", "4044", "On allocation, if a documentation fee was charged", "The cost of printing, which is 6097. Do not net them."],
+            ["Corner piece", "4046", "On allocation, if the plot is a corner", "Part of the plot price. The plot is 4020. The corner is 4046."],
+        ],
+        [0.24, 0.12, 0.32, 0.32],
+    )
+    doc.p("Use **4040** only for a charge that is none of those three. Do not add any of them to 4020 to make one round number. The commission register deducts a documentation cost before it computes the agent’s commission. If the fee is buried in the plot price, that computation cannot be checked.")
+    doc.p("Construction and engineering revenue is **4010**, and only when the related performance is complete. 12 Basket and Scrapays are this line, not a plot. The cost, released on that day, is **5010** for materials and subcontracts or **5030** for site labour and equipment hire. Do not put a plot sale in 4010 because the subscriber is a contractor. Do not put a construction invoice in 4020 because it feels like property.")
+    doc.p("Engagement Service is **4030**. Other trading is **4130**, and its cost is **5040**. A trade must not look like a plot. If you cannot tell, from the invoice, whether you sold a plot or a service, the item is wrong.")
+    doc.p("Interest earned on a bank balance is **4110 Interest Income**. A bank charge is not negative interest. It is 6050. Interest on a facility is **7010**. The return on co-ownership is **7020**, not 7010 and not 4110.")
 
     # 13
     doc.h1("13.  Money going out")
@@ -1427,7 +1482,8 @@ def write(doc):
     doc.table(
         ["What you are paying", "Account on the bill", "Not this"],
         [
-            ["Selling commission", "6035 Selling commissions", "Do not net it against 4020 or 4025. Do not bury it in 6040."],
+            ["Selling commission, agent or upline", "6035 Selling commissions, gross", "Do not net it against 4020 or 4025. The upline is the same account, its own bill."],
+            ["Staff lodge, rent and upkeep", "6065 Site lodge and staff accommodation", "Not 1220. The lodge is not the house being sold."],
             ["Subcontractor or materials on a house still being built", "1220 Construction work in progress", "Not 5010, until construction revenue is recognised."],
             ["Land still held", "1210 Land held for resale", "Not 5020, until the plot is allocated."],
             ["Development cost not yet on a plot or unit", "1205 Development inventory", "Not an overhead, if it is inventory."],
@@ -1439,12 +1495,23 @@ def write(doc):
         ],
         [0.34, 0.36, 0.30],
     )
-    doc.p("Pay the bill from the bank that pays it: open the bill, record the payment, Deposit From that bank. Then **Match** the withdrawal to the bill payment. If Zoho offers Categorize and suggests Cost of Goods Sold, that suggestion is the same trap as Other Income, facing the other way. Do not take it.")
+    doc.p("Pay the bill from the bank that pays it: open the bill, **Record Payment**, Paid Through that bank. Then **Match** the withdrawal to the bill payment. If Zoho offers Categorize and suggests Cost of Goods Sold, that suggestion is the same trap as Other Income, facing the other way. Do not take it.")
+    doc.figure(
+        "vendor-payment.png",
+        "Record Payment on a bill. Vendor, amount, date, and Paid Through. In this sample the currency is dollars, the mode is cash and the account is Petty Cash. Yours is naira, the mode is the one that matches the bank, and Paid Through is 1010, 1020, 1030 or 1040. Bank charges, if the bank deducted any, are 6050, not a reduction of the bill.",
+    )
     doc.p("Withholding tax you deduct from a vendor is not a discount. Pay the vendor the net. Journal the gross-up, or record the bill at gross and the withholding tax as the balance you still owe to the tax authority, in **2160 Withholding tax payable**. Attach the evidence. Do not expense the tax twice, and do not credit income with it.")
     doc.p("A vendor credit note reduces the bill. **Purchases > Vendor Credits**, against that bill. It does not credit 4020. It does not credit 4150.")
+    doc.h2("An expense with no bill")
+    doc.p("A small payment that has no bill still needs an account. **Purchases > Expenses > + New**, or categorise the bank line. The expense account is the thing you bought. Paid Through is the bank or the float that paid it. Attach the receipt. Do not leave the line on Cost of Goods Sold because that is what the sample shows.")
+    doc.figure(
+        "record-expense.png",
+        "The expense screen. Ignore the sample: the currency is dollars, the expense account is Cost of Goods Sold, and tax is on. For Baay the currency is naira, tax is none unless the Head of Accounts has said otherwise, and the expense account is the line in the table above. Paid Through is the bank or 1055, not Advance Tax.",
+    )
+    doc.p("Site imprest is **1055**. When cash is given to the site, credit the bank and debit 1055. When the site spends it, credit 1055 and debit the cost or the expense, and attach the site list. A reimbursement of the float is the reverse of the first entry. It is not income. The Eden and Pacific registers call many of these lines imprest. Read the list before you post the total to an expense. A float that has not been spent is still 1055.")
 
     # 14
-    doc.h1("14.  A refund")
+    doc.h1("14.  A refund, a rollover, and a default charge")
     doc.p("There are two refunds. They do not share an account. The status Refund on the register is Client Relations’ note. The books follow the document, not the word.")
     doc.h2("The money was still a deposit")
     doc.p("Open **Sales > Payments Received**, find the retainer payment, and **Refund**. Paid through the bank that sends the money. Date is the date it leaves the bank. This debits **2020**. It is not an expense. Do not use 6085. Do not raise a credit note against a sale that was never recognised. Match the withdrawal to the refund.")
@@ -1456,6 +1523,9 @@ def write(doc):
     )
     doc.p("If cash goes back, refund the credit from the credit note, through the paying bank, and match the withdrawal. If the subscriber is staying and the credit will sit against a later invoice, apply it there. Do not also expense it.")
     doc.p("**6085 Customer refunds** is only where the receipt was already income and cannot be reversed against that sale. That should be rare. If you are about to use 6085, stop and check whether a credit note will do it. A deposit refund is never 6085. A commission clawback is not 6085 either. A clawback reduces 6035, or credits it, against the vendor.")
+    doc.h2("A missed instalment")
+    doc.p("The receipt says a defaulted instalment carries a charge of 10 per cent of the amount defaulted. Raise it only when an instalment was actually missed, and only for that amount. It is item **Default charge**, account **4120 Late Fee Income**, tax none, on an invoice to the subscriber, dated the day it is raised. It is not a tax. It is not the next instalment. Do not let Zoho raise it automatically. A plan that was never entered in Zoho will fire a fee the subscriber does not owe.")
+    doc.p("Collect it as a payment against that invoice, and match the bank line to the payment. Do not add it to the retainer. A retainer is the plot or the house. The charge is a fee for being late, and mixing the two means a later allocation will treat the fee as part of the price.")
 
     # 15
     doc.h1("15.  Related parties, dividends and unpaid shares")
@@ -1522,18 +1592,18 @@ def write(doc):
         "lock-date.png",
         "The lock date is the last day of the month you have reconciled. The reason is written, not left as the sample sentence. A locked month stays locked.",
     )
-    doc.p("Lock date: the last day of the month. Reason: the month, the person, and the statement date it was reconciled to. A correction after the lock is a journal in the open month, with a note that says which month it belongs to. It is not a quiet edit of the old one. If a lock has to be lifted, the Managing Director approves it, and the reason is written on the unlock. Client Relations cannot do this. A lifted lock that is not put back the same day is not a lift. It is an open month.")
+    doc.p("Lock date: the last day of the month. Reason: the month, the person, and the statement date it was reconciled to. A correction after the lock is a journal in the open month, with a note that says which month it belongs to. It is not a quiet edit of the old one. If a lock has to be lifted, the Head of Accounts approves it, and the reason is written on the unlock. Client Relations cannot do this. A lifted lock that is not put back the same day is not a lift. It is an open month.")
 
     # 18
     doc.h1("18.  Five screens before you close")
-    doc.p("Before you tell the Managing Director the month is closed, these five agree. They are the pack. They are not five more reports for their own sake.")
+    doc.p("Before you tell the Head of Accounts the month is closed, these five agree. They are the pack. They are not five more reports for their own sake.")
     doc.table(
         ["Screen", "Where", "What “agreed” means"],
         [
             ["1. Cash by bank", "The four bank accounts, plus 1050 and 1055", "Each balance agrees to the statement or the count. Uncategorized is nil."],
             ["2. Collections by estate", "Reports > Payments Received > Customize. Transaction type: Retainer Payment. This month.", "Every retainer payment has a project. The total agrees to what Client Relations says was collected."],
             ["3. Money that is not yet a sale", "Unearned Revenue, 2020", "It moved only because a retainer was applied to an invoice, or refunded. It did not move because a bank rule credited income."],
-            ["4. Co-ownership", "2025, on its own", "New receipts are here. None of them are in 4020 or 4025."],
+            ["4. Co-ownership", "2025 beside 2060", "New principal is in 2025. The return accrued this month is in 7020, and the unpaid return is in 2060. None of it is in 4020 or 4025."],
             ["5. Still unnamed", "2045 and 1180", "Each line has an owner and an age. A line older than the week is named or explained."],
         ],
         [0.24, 0.38, 0.38],
@@ -1548,7 +1618,7 @@ def write(doc):
         "4025 equals the units handed over in the month, at contract price.",
         "5020 and 5025 moved on those same days.",
         "4099 Sales is nil. 9090 Uncategorized is nil. 3098 Opening Balance Offset is nil.",
-        "4040 is the ancillary charges, and you can name each one.",
+        "4042, 4044 and 4046 are the levy, the documentation fee and the corner piece, and you can name each line.",
     ])
     doc.p("If 4020 equals the bank, the month is not closed. It has been posted the old way. Unlock nothing yet. Find the retainer that was categorised as income, reverse it, and post section 6.")
 
@@ -1557,7 +1627,8 @@ def write(doc):
     doc.p("Pin this. The rest of the guide is how. This is the list of things that are wrong even when the software allows them.")
     doc.bullets([
         "A subscriber receipt to 4020, 4025, 4099, 4150 or 4110.",
-        "A co-ownership receipt to any income account, or to a retainer.",
+        "A co-ownership receipt to any income account, or to a retainer. A co-ownership return debited to 2025, or credited to revenue.",
+        "A default charge raised on an instalment that was not missed, or added to the retainer.",
         "A transfer as income on one side and an expense on the other.",
         "VAT on residential land or housing.",
         "A deposit refund to 6085.",
@@ -1579,7 +1650,7 @@ def write(doc):
     doc.h1("20.  A worked week")
     doc.p("One subscriber, one plot, three days. The figures are the examples already used. Post them in a test only if you want to see the buttons. Do not post them into the live organisation.")
     doc.h2("Monday — the instalment")
-    doc.p("Providus, ₦1,500,000, Green City — Lantaba, plot still Paying. Retainer invoice. Record Payment to 1010. Match the bank line. Sales does not move.")
+    doc.p("Providus, ₦1,500,000, Green City Phase 1 (Ketu-Epe), plot still Paying. Retainer invoice. Record Payment to 1010. Match the bank line. Sales does not move.")
     doc.journal(
         [
             ("1010", "Providus Bank", 1_500_000, 0),
@@ -1610,7 +1681,7 @@ def write(doc):
     doc.p("At the end of Friday, 4020 is ₦3,000,000, not ₦1,500,000. 2020 for this subscriber is nil. The bank is unchanged by the allocation. That is the week, working. If your test shows 4020 of ₦1,500,000, you categorised the Monday receipt as income. Reverse it and do Monday again.")
     doc.h2("The same week, three other lines")
     doc.bullets([
-        "₦10,000,000 into GTBank from an investor. Credit 2025. Not a retainer. Section 7.",
+        "₦10,000,000 into GTBank from a co-owner. Credit 2025. Not a retainer. Accrue the return to 7020 and 2060 from the certificate, not from this note. Section 7.",
         "₦250,000 into First Bank, narration useless. Credit 2045 the same day. Name it this week. Section 9.",
         "₦150,000 commission out of Providus. Debit 6035. Match the bill payment. Do not deduct it from 4020. Section 13.",
     ])
@@ -1620,9 +1691,10 @@ def write(doc):
     doc.table(
         ["Person", "Does", "Does not"],
         [
-            ["Client Relations", "Opens the subscriber, after searching. Raises the retainer. Records the payment when the money is in the bank. Changes the status: Paying, Bought, Paid, Handed over, Refund. Attaches the receipt, the allocation letter or the handover note.", "Categorise a bank line. Publish a journal. Change the chart. Choose an income account. Unlock a month. Create a customer from a narration."],
-            ["Finance and Accounts", "Matches the bank the same day. Posts co-ownership, transfers and unnamed lines. Raises the invoice on allocation or handover, applies the retainer, and publishes the cost. Reconciles. Locks. Pulls the five screens.", "Accept Other Income on a subscriber deposit. Recognise housing because it is paid. Use Opening Balance Offset to force a month."],
-            ["Managing Director", "Opens the five screens. Approves a lock, and approves any unlock. Decides a handover where the file is unclear.", "Re-key a receipt that Client Relations has already recorded."],
+            ["Client Relations", "Opens the subscriber, after searching. Raises the retainer. Records the payment when the money is in the bank. Sets the register status: Prospect, Paying, Completed, Refund, Void, Incentive. Attaches the receipt, the allocation letter or the handover note.", "Categorise a bank line. Publish a journal. Change the chart. Choose an income account. Raise a default charge. Unlock a month. Create a customer from a narration."],
+            ["Finance and Accounts", "Matches the bank the same day. Posts co-ownership principal, the return accrual, transfers and unnamed lines. Raises the invoice on allocation or handover, the levy, the documentation fee and the corner piece. Applies the retainer, and publishes the cost. Reconciles. Locks. Pulls the five screens.", "Accept Other Income on a subscriber deposit. Recognise housing because it is paid. Accrue a return the certificate does not state. Use Opening Balance Offset to force a month."],
+            ["Sales", "Sees the customers on their own project, and the balance still to collect.", "Raises an invoice, records a payment, posts a commission, or opens another project’s list."],
+            ["Head of Accounts", "Opens the five screens. Approves a lock, and approves any unlock. Confirms a co-ownership status the record cannot.", "Re-key a receipt that Client Relations has already recorded."],
             ["Company secretary", "Reads. Enough to answer a director.", "Post."],
         ],
         [0.22, 0.40, 0.38],
@@ -1649,10 +1721,12 @@ def write(doc):
             ["10", "Apply a retainer to an invoice", "Retainer invoices"],
             ["11", "A published manual journal", "Manual journals"],
             ["12", "The Account column on a vendor bill", "Bills"],
-            ["13", "New credit note", "Credit notes"],
-            ["14", "Transaction locking, by module", "Transaction locking"],
-            ["15", "The lock date and the reason", "Transaction locking"],
-            ["16", "Payments Received, filtered to retainer payments", "Payments received"],
+            ["13", "Record Payment on a vendor bill", "Payments made"],
+            ["14", "An expense with no bill", "Expenses"],
+            ["15", "New credit note", "Credit notes"],
+            ["16", "Transaction locking, by module", "Transaction locking"],
+            ["17", "The lock date and the reason", "Transaction locking"],
+            ["18", "Payments Received, filtered to retainer payments", "Payments received"],
         ],
         [0.12, 0.46, 0.42],
     )
@@ -1666,7 +1740,7 @@ def main():
         "bank-statements.png", "invoice-new.png", "invoice-lines.png",
         "apply-retainer.png", "journal.png", "bill-account.png",
         "credit-note.png", "lock-list.png", "lock-date.png",
-        "collections-report.png",
+        "collections-report.png", "vendor-payment.png", "record-expense.png",
     ) if not (SCREENS / name).exists()]
     if missing:
         raise SystemExit(f"Missing screenshots: {missing}")
