@@ -38,3 +38,8 @@ Training guide for the consultant. One sitting each for sales, client relations,
 
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Training_Guide.docx`
 - `BAAY_PROJECTS_LIMITED_Zoho_Books_Training_Guide.pdf`
+
+Withholding tax rates setup for vendors, in Zoho Books Premium. The rate list from the Nigeria Tax Act 2025 and the 2024 withholding regulations, matched to what Baay buys, with the screens where each rate is typed.
+
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Withholding_Tax_Setup_Guide.docx`
+- `BAAY_PROJECTS_LIMITED_Zoho_Books_Withholding_Tax_Setup_Guide.pdf`
