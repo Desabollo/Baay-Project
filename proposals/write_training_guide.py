@@ -501,6 +501,12 @@ def write(doc):
         "vendor-payment.png",
         "Record Payment on a bill. Vendor, amount, date, and Paid Through. This sample is in dollars, paid from Petty Cash. Yours is naira, and Paid Through is the bank that paid. Do not tick a short payment unless the bank really paid short.",
     )
+    doc.p("If the vendor card has withholding tax on, the bill already shows the rate on the line and the deduction under the total. On Record Payment, set Withholding Tax Deducted to Yes. The net leaves the bank. The credit sits in 2160 until it is remitted by the 21st of the following month. The thirteen rates and the vendor tags are set once, in the withholding tax setup guide. This room does not invent or change a rate.")
+    doc.figure(
+        "whs-payment.png",
+        "Record Payment with Withholding Tax Deducted set to Yes. The amount shown credits 2160. Sample amount, date and Paid Through are Zoho’s. Yours is naira, and Paid Through is the bank that paid.",
+    )
+    doc.p("To show where that credit sits by estate and by what was bought: Reports > Purchases > Purchases by Item, filtered or grouped by Project. Each bill line carries Project and Item, so the split is already there. Point at one line and say the estate, the item, the rate, and that the credit is 2160. A line with no project cannot be reported — fix the bill, not the report.")
     doc.step("5", "An expense with no bill", "Purchases > Expenses > + New, or categorise the bank line. The expense account is the thing bought. Paid Through is the bank, or 1055 if the site float paid it. Tax is none unless the Head of Accounts has said otherwise. Attach the receipt. Site imprest is not an expense when you hand the float out. Handing the float out debits 1055. Spending it credits 1055 and debits the cost.")
     doc.figure(
         "record-expense.png",
@@ -551,6 +557,7 @@ def write(doc):
         "Find the ₦1,000 retainer Client Relations left on Test Subscriber. Confirm the credit is 2020. Void the payment. Void the retainer. Confirm the bank and 2020 are back where they started.",
         "Publish a journal for ₦1, debit 1180, credit 2045. Reverse it. Both accounts must be unchanged.",
         "Point at the Categorize button on a deposit and say which account you would refuse.",
+        "Open Purchases by Item, filter to one project, and point at a line that carried withholding tax. Say the rate, the estate, and that the credit sits in 2160.",
     ])
     doc.stop("Do not post the ₦3,000,000 example, the ₦45,000,000 handover, or any real subscriber, in this sitting. If the void does not clear the ₦1,000, do not leave the room. A practice receipt left in the bank will be matched to a real statement later.")
     doc.table(
@@ -560,6 +567,7 @@ def write(doc):
             ["Raise the invoice on allocation or handover, and the levy, fee and corner piece", "Recognise housing because the receipt was large, or because the status says Completed"],
             ["Publish the cost journal the same day, and the co-ownership accrual from the certificate", "Accrue a return the certificate does not state, or debit 2025 for the return"],
             ["Lock a reconciled month", "Change the chart, or unlock a month without the Head of Accounts"],
+            ["Apply withholding tax on a bill line and record the deduction at payment", "Change a rate, or leave a bill line without its project"],
         ],
         [8.6, 8.6],
     )
@@ -628,7 +636,7 @@ def main():
         "bill-account.png", "vendor-payment.png", "record-expense.png",
         "invoice-new.png", "invoice-lines.png", "apply-retainer.png",
         "journal.png", "credit-note.png", "lock-list.png", "lock-date.png",
-        "collections-report.png",
+        "collections-report.png", "whs-payment.png",
     ]
     missing = [name for name in needed if not (SCREENS / name).exists()]
     if missing:

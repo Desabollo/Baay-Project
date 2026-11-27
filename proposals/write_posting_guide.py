@@ -1182,6 +1182,10 @@ def write(doc):
     doc.p("The four bank accounts are 1010 Providus, 1020 First Bank, 1030 Sterling and 1040 GTBank. Opening balances agree to the signed statement of financial position at 31 December 2025, including cash of **₦155,904,157.58** across the banks. Do not re-key the old bank lines. There are some twenty-three thousand of them. This guide starts from that opening. It is not a history load.")
     doc.h2("Who may touch what")
     doc.p("Set the roles before go-live, not after the first argument. Section 21 is the card. The short version: Client Relations can open a subscriber, raise a retainer and set a status. They cannot change the chart, publish a journal, categorise a bank line to income, or unlock a month. Finance posts, matches, recognises and locks. The Head of Accounts sees the five screens in section 18 and approves. Sales can see their own project. They cannot take a payment.")
+    doc.h2("Withholding tax on vendors")
+    doc.p("**Settings > Taxes > Withholding Tax.** Enable it for Vendors. Create the rate list from **BAAY_PROJECTS_LIMITED_Zoho_Books_Withholding_Tax_Setup_Guide.docx** — the thirteen names, the rates from the Nigeria Tax Act 2025 and the 2024 withholding regulations, purchases pointed at **2160** and sales at **1150**. Tick the purchases override so a no-TIN doubling can be typed on a bill and approved. Leave the customer side off until the Head of Accounts asks for it; that side is 1150, and it is a different conversation.")
+    doc.p("Tag every active vendor card: **Enable Withholding Tax for this Vendor**, and the default rate for what that vendor sells Baay — a building contractor gets Construction 2 per cent, a law firm Professional 5, a landlord Rent 10, a land agent Commission 5. Write the TIN on the card. No TIN, no standard rate: the doubled rate or an approved override, and the Head of Accounts hears about it before the money leaves.")
+    doc.p("Every bill line that suffers the tax carries the rate. Every bill line also carries the **Project** — the estate — and the **Item**. Those two fields are how the deduction is later reported by estate and by what was bought. A line with no project cannot be split at the month-end, and no report will invent one.")
 
     # 5
     doc.h1("5.  Every receipt, the same day")
@@ -1500,7 +1504,17 @@ def write(doc):
         "vendor-payment.png",
         "Record Payment on a bill. Vendor, amount, date, and Paid Through. In this sample the currency is dollars, the mode is cash and the account is Petty Cash. Yours is naira, the mode is the one that matches the bank, and Paid Through is 1010, 1020, 1030 or 1040. Bank charges, if the bank deducted any, are 6050, not a reduction of the bill.",
     )
-    doc.p("Withholding tax you deduct from a vendor is not a discount. Pay the vendor the net. Journal the gross-up, or record the bill at gross and the withholding tax as the balance you still owe to the tax authority, in **2160 Withholding tax payable**. Attach the evidence. Do not expense the tax twice, and do not credit income with it.")
+    doc.p("Withholding tax you deduct from a vendor is not a discount. The bill stays gross. On each line that suffers the tax, tick **Apply Withholding Tax** and pick the rate from the list in section 4 — construction 2 per cent, professional 5, general services 2, rent 10, and the rest. Leave the tick off an exempt line, such as goods bought direct from the manufacturer, and say why in the notes. Project and Item stay on the line; they are how section 16 will report this by estate and by what was bought.")
+    doc.figure(
+        "whs-bill.png",
+        "The Withholding Tax section under the bill total. The deduction reduces Balance Due, not the bill total. Ignore the VAT line and the sample currency: Baay’s bills are in naira, and the rate on the line comes from the setup guide.",
+    )
+    doc.p("Then **Record Payment**. Paid Through the bank that pays. Set **Withholding Tax Deducted to Yes**. The amount comes from the bill — check it against your own sum. That is the button that posts. Behind it: debit the line’s account for the gross, credit **2160 Withholding tax payable** for the deduction, credit the bank for the net. Match the withdrawal to the payment. Attach the evidence.")
+    doc.figure(
+        "whs-payment.png",
+        "Record Payment on a bill, Withholding Tax Deducted set to Yes. The amount shown is what credits 2160. Sample amount, date and Paid Through are Zoho’s. Yours is naira, and Paid Through is 1010, 1020, 1030 or 1040.",
+    )
+    doc.p("2160 is the balance still to remit. Do not expense it, do not net it against the bill, and do not credit income with it. Remit by the 21st of the following month, as in section 16.")
     doc.p("A vendor credit note reduces the bill. **Purchases > Vendor Credits**, against that bill. It does not credit 4020. It does not credit 4150.")
     doc.h2("An expense with no bill")
     doc.p("A small payment that has no bill still needs an account. **Purchases > Expenses > + New**, or categorise the bank line. The expense account is the thing you bought. Paid Through is the bank or the float that paid it. Attach the receipt. Do not leave the line on Cost of Goods Sold because that is what the sample shows.")
@@ -1570,6 +1584,10 @@ def write(doc):
     doc.p("Post the tax from the tax computation for the period. This guide does not contain a rate for you to apply to profit, and the journal is not an agreed assessment.")
     doc.p("Debit **8010 Income tax expense — current tax**. Credit, split by levy, **2110** companies income tax, **2120** tertiary education tax, **2130** police trust fund levy, **2140** NASENI levy. The credits must add to the debit. Do not post current tax to 2610. Deferred tax, if it is recognised, is **8020** and **1610** or **2610**, and only when it is recognised. Do not open 2610 to make the current-tax journal look complete.")
     doc.p("The audit and tax advisory fee is 6040, when billed. It is not 8010.")
+    doc.h2("Withholding tax deducted from vendors")
+    doc.p("Report on **2160**. The credit balance is what has been deducted from vendors and not yet remitted. It is not profit, not an expense, and not a discount already taken — the expense on each bill was always the gross.")
+    doc.p("Remit by the 21st of the month after the deduction. Company payees go to the federal revenue service. Individual payees — rent paid to a person, directors’ fees — go to the state revenue service. Attach the remittance receipt to the month, with the bank statements. After the remittance, 2160 holds only the new deductions; it does not carry a cleared balance forward as a mystery.")
+    doc.p("To see the same figure by estate and by what was bought: **Reports > Purchases > Purchases by Item**, filtered or grouped by **Project**. Each bill line carries Project and Item, so the split is already in the data — the report only reads it. Point at one line and you should be able to say the estate, the item, the rate and the naira withheld. A line with no project is a setup miss on the bill, not a reporting problem: fix the line before the lock, not the report after it. The rate list itself is in the withholding tax setup guide; this guide does not restate the thirteen names.")
     doc.h2("Presentation of receivables, and only at the statement date")
     doc.p("During the month, leave open invoices in **Accounts Receivable (1100)**. That is where the customer statement is right. Do not reclassify every invoice on a Friday.")
     doc.p("When you are preparing the statement of financial position, Finance moves the open customer balances into the stream accounts, by journal: debit **1120** for unpaid land, **1125** for unpaid housing, **1110** for unpaid construction, and credit 1100. Customer statements still read the customer. Reverse that journal on the first day of the next period, so the new month does not start with the same receivable in two accounts. If you are not preparing statements, do not do this journal. A monthly reclassification that is not reversed will double the asset the moment someone adds 1100 to 1120.")
@@ -1741,6 +1759,7 @@ def main():
         "apply-retainer.png", "journal.png", "bill-account.png",
         "credit-note.png", "lock-list.png", "lock-date.png",
         "collections-report.png", "vendor-payment.png", "record-expense.png",
+        "whs-bill.png", "whs-payment.png",
     ) if not (SCREENS / name).exists()]
     if missing:
         raise SystemExit(f"Missing screenshots: {missing}")
